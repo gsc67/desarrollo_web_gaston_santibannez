@@ -1,0 +1,102 @@
+/* -----------------------------------------------
+Esta es la configuración para los principales elementos html.
+----------------------------------------------- */
+
+body {
+    background-color: beige;
+    color: black;
+}
+
+p {
+    font-family: "Consolas", monospace;
+    font-size: 18px;
+}
+
+em { /* ¡énfasis! */
+    letter-spacing: 0.055em;
+    font-style: italic;
+    font-weight: bold;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+/* -----------------------------------------------
+Estos elementos son los hipervínculos que permiten navegar la página
+----------------------------------------------- */
+
+table.navbar {
+    font-family: "Consolas", monospace;
+    margin-bottom: 0.5em;
+    width: 100%;
+    table-layout: fixed;
+    color: yellow;
+}
+
+th.navbar_left {
+    text-align: left;
+}
+
+th.navbar_center {
+    text-align: center;
+}
+
+th.navbar_right {
+    text-align: right;
+}
+
+/* -----------------------------------------------
+Estos son elementos estilizados para ciertos usos puntuales, como subsecciones o arte ASCII.
+----------------------------------------------- */
+
+p.ASCII_art {
+    font-family: monospace;
+    font-size: 0.5em;
+    text-align: center;
+    white-space: pre;
+}
+
+div.centered_box {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* -----------------------------------------------
+Otros estilos no utilizados (aún)
+----------------------------------------------- */
+
+h1 {
+    font-family: "Georgia", serif;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: "Georgia", serif;
+    font-size: 24px;
+}
+
+h3 {
+    font-family: "Consolas", monospace;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+h6 {
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    font-style: italic;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
