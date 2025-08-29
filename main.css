@@ -69,6 +69,13 @@ div.centered_box {
     align-items: center;
 }
 
+.error {
+    font-family: serif;
+    font-size: 0.5 em;
+    color: red;
+    font-weight: bold;
+}
+
 /* -----------------------------------------------
 Otros estilos no utilizados (aún)
 ----------------------------------------------- */

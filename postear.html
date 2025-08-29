@@ -16,37 +16,44 @@
 </header>
 
 <section>
-    <h1>Agregar aviso de adopci贸n</h1>
+    <h1>Agregar aviso de adopción</h1>
     
-    <p><b>驴Sabes de un animalito que necesita un nuevo hogar?</b></p>
+    <p><b>?Sabes de un animalito que necesita un nuevo hogar?</b></p>
     
-    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo 馃惗馃彙:</p>
+    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo ??????:</p>
     
-    <!-- Despliega un formulario que permite informar un nuevo aviso de perro o gato en adopci贸n. 
+    <!-- Despliega un formulario que permite informar un nuevo aviso de perro o gato en adopción. 
     Debe solicitar los siguientes datos, separados en tres secciones: 
-        1. informaci贸n del lugar de entrega, 
+        1. información del lugar de entrega, 
         2. datos del contacto y 
-        3. la informaci贸n de los animales en adopci贸n considerando las reglas de validaci贸n que se mencionan -->
+        3. la información de los animales en adopción considerando las reglas de validación que se mencionan -->
         
-    <form>
-        <h2>Informaci贸n de Contacto</h2>
+    <form name="newPetAd">
+        <h2>Información de Contacto</h2>
         
-        <!-- De acuerdo a las instrucciones, el atributo required y similares no cuentan como validaci贸n.
-        La validaci贸n real se implementar谩 en JavaScript, pero esto sigue siendo un <i>pre-check</i> 煤til. -->
+        <!-- De acuerdo a las instrucciones, el atributo required y similares no cuentan como validación.
+        La validación real se implementará en JavaScript, pero esto sigue siendo un <i>pre-check</i> útil. -->
         <label for="contactName">Nombre completo: </label>
         <input id="contactName" name="contactName" type="text" minlength="3" maxlength="200" size="50" required>
+        <p id="contactNameErrorMessage" class="error"></p>
         <br>
         
-        <label for="contactEmail">Correo electr贸nico: </label>
+        <label for="contactEmail">Correo electrónico: </label>
         <input id="contactEmail" name="contactEmail" type="email" maxlength="100" size="50" required>
+        <p id="contactEmailErrorMessage" class="error"></p>
         <br>
         
-        <label for="contactPhoneNumber">N煤mero telef贸nico: </label>
+        <label for="contactPhoneNumber">Número telefónico: </label>
         <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel">
+        <p id="contactPhoneNumberErrorMessage" class="error"></p>
         <br>
         
         <!-- TODO: Contactar por -->
+        
+        <button id="sendAdPostButton" type="button">ENVIAR</button>
     </form>
+    
+    <script lang="javascript" src="./postear.js"></script>
 </section>
 
 </body>
