@@ -22,13 +22,18 @@ const findCharacter = (string, character, start = 0) => {
 // Retorna 0 para un nombre válido, 1 de lo contrario. 
 // Estándar para toda la serie de funciones "handle[...]Error"
 const handleNameError = () => {
-    let     name        = document.newPetAd.contactName.value;
-    let     nameError   = document.getElementById("contactNameErrorMessage");
+    let name = document.newPetAd.contactName.value;
+    let nameError = document.getElementById("contactNameErrorMessage");
     
-    const   nameCode    = checkLength(name, 3, 200);
-    if (nameCode == 1) {        nameError.innerHTML = "Tu nombre debe tener al menos 3 caracteres"; } 
-    else if (nameCode == 2) {   nameError.innerHTML = "Tu nombre debe tener a lo más 200 caracteres"; } 
-    else {                      nameError.innerHTML = ""; return 0 }
+    const nameCode = checkLength(name, 3, 200);
+    if (nameCode == 1) { 
+        nameError.innerHTML = "Tu nombre debe tener al menos 3 caracteres"; 
+    } else if (nameCode == 2) { 
+        nameError.innerHTML = "Tu nombre debe tener a lo más 200 caracteres"; 
+    } else { 
+        nameError.innerHTML = ""; 
+        return 0;
+    }
     
     /* Una observación útil:
     A priori, queremos que este campo sea obligatorio.
@@ -49,8 +54,7 @@ const handleEmailError = () => {
     const emailCode = checkLength(email, 1, 100); // ¿Mínimo 1? Vea el comentario en handleNameError
     if (emailCode == 1) { 
         emailError.innerHTML = "Por favor, proporciona una dirección de correo electrónico";
-    } 
-    else if (emailCode == 2) {
+    } else if (emailCode == 2) {
         emailError.innerHTML = "Tu correo debe tener a lo más 100 caracteres";
     } 
     if (emailError.innerHTML != "") { return 1; }
@@ -74,8 +78,7 @@ const handleEmailError = () => {
     const domainPosition = findCharacter(email, '.', atPosition);
     if (domainPosition == atPosition + 1) {
         emailError.innerHTML = "Tu correo tiene un punto inmediatamente después de '@'";
-    }
-    else if (domainPosition == -1) {
+    } else if (domainPosition == -1) {
         emailError.innerHTML = "Tu correo no tiene un dominio, como '.com' o '.cl'";
     }
     if (emailError.innerHTML != "") { return 1; }
