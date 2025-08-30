@@ -89,9 +89,35 @@ const handleEmailError = () => {
     return 0;
 };
 
+const handlePhoneError = () => {
+    let phone = document.newPetAd.contactPhoneNumber.value;
+    let phoneError = document.getElementById("contactPhoneNumberErrorMessage");
+    phoneError.innerHTML = "";
+    
+    let len = phone.length;
+    if (len == 0) { return 0; } // El número de teléfono es opcional
+    
+    if (phone.substring(0, 4) != '+569') { 
+        phoneError.innerHTML = "El número de teléfono debe empezar por '+569'";
+    } else if (phone.length != 12) {
+        phoneError.innerHTML = "El número debe tener 11 dígitos, sin espacios entremedio";
+    } else {
+        for (let index = 4; index < 12; index++) {
+            if (!['0','1','2','3','4','5','6','7','8','9'].includes(phone.charAt(index))) {
+                phoneError.innerHTML = "El número debe tener un signo '+' seguido únicamente de caracteres numéricos";
+                break;
+            }
+        }
+    }
+    if (phoneError.innerHTML != "") { return 1; }
+    
+    return 0;
+}
+
 const validateAdPostData = () => {
-     handleNameError();
-     handleEmailError();
+    handleNameError();
+    handleEmailError();
+    handlePhoneError();
 };
 
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
