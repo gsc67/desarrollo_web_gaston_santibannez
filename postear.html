@@ -31,15 +31,13 @@
     <form name="newPetAd">
         <h2>Informaci車n de Contacto</h2>
         
-        <!-- De acuerdo a las instrucciones, el atributo required y similares no cuentan como validaci車n.
-        La validaci車n real se implementar芍 en JavaScript, pero esto sigue siendo un <i>pre-check</i> 迆til. -->
         <label for="contactName">Nombre completo: </label>
-        <input id="contactName" name="contactName" type="text" minlength="3" maxlength="200" size="50" required>
+        <input id="contactName" name="contactName" type="text" size="50">
         <p id="contactNameErrorMessage" class=error></p>
         <br>
         
         <label for="contactEmail">Correo electr車nico: </label>
-        <input id="contactEmail" name="contactEmail" type="email" maxlength="100" size="50" required>
+        <input id="contactEmail" name="contactEmail" type="email" size="50">
         <p id="contactEmailErrorMessage" class=error></p>
         <br>
         
