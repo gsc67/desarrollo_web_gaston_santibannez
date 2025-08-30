@@ -19,6 +19,13 @@ const handleNameError = () => {
     else if (nameCode == 2) {   nameError.innerHTML = "Tu nombre debe tener a lo más 200 caracteres"; } 
     else {                      nameError.innerHTML = ""; return 0 }
     
+    /* Una observación útil:
+    A priori, queremos que este campo sea obligatorio.
+    Si el usuario no lo llena, JavaScript reportará el largo del elemento como 0. 
+    Por lo tanto, solicitar que el campo sea requerido equivale a pedir que su largo sea al menos 1
+    (o un número mayor). Dado que ya verificamos que es al menos 3, no es necesario hacer otro chequeo. 
+    Este mismo principio se aplica en el resto de campos requeridos. */
+    
     return 1;
 };
 
