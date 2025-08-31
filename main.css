@@ -71,9 +71,11 @@ div.centered_box {
 
 .error {
     font-family: serif;
-    font-size: 0.5em;
+    font-size: 0.8em;
     color: red;
     font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: -0.8em;
 }
 
 /* -----------------------------------------------
