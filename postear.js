@@ -136,10 +136,39 @@ const handlePhoneError = () => {
     return 0;
 }
 
+const handlePlatformsError = () => {
+    let checkNum = 0;
+    let output = 0;
+    
+    for (const platform of supportedContactPlatforms) {
+        let platformCheck = document.getElementById("contactThrough" + platform);
+        let platformError = document.getElementById("contact" + platform + "ErrorMessage");
+        const platformUser = document.getElementById("contact" + platform + "User");
+        const platformCode = checkLength(platformUser.value, 4, 50);
+        
+        platformError.innerHTML = "";
+        
+        if (platformCheck.checked) { // Opcional, pero si lo marca, _debe_ proveer la información
+            checkNum += 1;
+            if (checkNum > 5) { // máximo 5
+                platformError.innerHTML = "Ingresa a lo más 5 plataformas, por favor";
+            } else if (platformCode == 1) {
+                platformError.innerHTML = "Tu identificación de " + platform + " debe tener al menos 4 caracteres"
+            } else if (platformCode == 2) {
+                platformError.innerHTML = "Tu identificación de " + platform + " debe tener a lo más 50 caracteres"
+            }
+            if (platformError.innerHTML != "") { output = 1; }
+        }
+    }
+    
+    return output;
+};
+
 const validateAdPostData = () => {
     handleNameError();
     handleEmailError();
     handlePhoneError();
+    handlePlatformsError();
 };
 
 // --- EVENT LISTENERS ---
@@ -157,6 +186,7 @@ for (const platform of supportedContactPlatforms) {
         '<div id="contactToggle' + platform + '" class=hidden>' +
             '<label for="contact' + platform + 'User">Usuario </label>' +
             '<input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30">' +
+            '<p id="contact' + platform + 'ErrorMessage" class=error></p>' +
         '</div> <br>';
 }
 formPlatforms.addEventListener("change", dynamicUsernameBoxDisplay);
