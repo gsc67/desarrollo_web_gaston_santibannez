@@ -1,4 +1,8 @@
+// --- CONSTANTES ---
+
 const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
+
+// --- MÉTODOS AUXILIARES ----
 
 /* Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
 0  <--  En el rango esperado
@@ -30,6 +34,8 @@ const displayPlatformUsernameBox = (platform) => {
         userSection.style.display = "none";
     }
 };
+
+// --- MÉTODOS PRINCIPALES ---
 
 const dynamicUsernameBoxDisplay = () => {
     supportedContactPlatforms.forEach(displayPlatformUsernameBox);
@@ -135,6 +141,8 @@ const validateAdPostData = () => {
     handleEmailError();
     handlePhoneError();
 };
+
+// --- EVENT LISTENERS ---
 
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
 let submitButton = document.getElementById("sendAdPostButton");
