@@ -1,3 +1,5 @@
+const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
+
 /* Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
 0  <--  En el rango esperado
 1  <--  Más pequeño de lo esperado
@@ -17,7 +19,21 @@ const findCharacter = (string, character, start = 0) => {
         if (string.charAt(index) == character) { return index; }
     }
     return -1;
-}
+};
+
+const displayPlatformUsernameBox = (platform) => {
+    let check = document.getElementById("contactThrough" + platform);
+    let userSection = document.getElementById("contactToggle" + platform);
+    if (check.checked) {
+        userSection.style.display = "inline";
+    } else {
+        userSection.style.display = "none";
+    }
+};
+
+const dynamicUsernameBoxDisplay = () => {
+    supportedContactPlatforms.forEach(displayPlatformUsernameBox);
+};
 
 // Retorna 0 para un nombre válido, 1 de lo contrario. 
 // Estándar para toda la serie de funciones "handle[...]Error"
@@ -123,3 +139,16 @@ const validateAdPostData = () => {
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
 let submitButton = document.getElementById("sendAdPostButton");
 submitButton.addEventListener("click", validateAdPostData);
+
+// En vez de llenar el formulario del HTML con campos similares para cada red social, lo haremos con JS.
+// Así, añadir o eliminar una red social es tan sencillo como añadir o eliminar su nombre del array supportedContactPlatforms.
+let formPlatforms = document.getElementById("contactThroughDiv");
+for (const platform of supportedContactPlatforms) {
+    formPlatforms.innerHTML += '<label for="contactThrough' + platform + '">' + platform + '</label>' +
+        '<input id="contactThrough' + platform + '" name="contactThrough" type="checkbox">' +
+        '<div id="contactToggle' + platform + '" class=hidden>' +
+            '<label for="contact' + platform + 'User">Usuario </label>' +
+            '<input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30">' +
+        '</div> <br>';
+}
+formPlatforms.addEventListener("change", dynamicUsernameBoxDisplay);

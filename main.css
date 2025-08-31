@@ -78,6 +78,10 @@ div.centered_box {
     margin-bottom: -0.8em;
 }
 
+.hidden {
+    display: none;
+}
+
 /* -----------------------------------------------
 Otros estilos no utilizados (aún)
 ----------------------------------------------- */
