@@ -105,12 +105,29 @@ const findCharacter = (string, character, start = 0) => {
     return -1;
 };
 
+// Retorna 1 si todos los caracteres de la string son dígitos (0...9).
+// De lo contrario, retorna 0.
+const isComposedByDigits = (string) => {
+    const digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    for (let index = 0; index < string.length; index++) {
+        if (!digits.includes(string.charAt(index))) {
+            return 0;
+        }
+    }
+    return 1;
+};
+
 /*  ================
     ERROR HANDLERS
 */
 
 // En general, esta serie de métodos cumple:
 // Retorna 0 para una entrada válida, 1 de lo contrario. 
+
+/* 
+Primer bloque del formulario 
+*/
+
 const handleCommuneError = () => {
     let regionError = document.getElementById("petRegionErrorMessage");
     let comunaError = document.getElementById("petComunaErrorMessage");
@@ -132,7 +149,7 @@ const handleCommuneError = () => {
 const handleSectorError = () => {
     let sectorError = document.getElementById("sectorErrorMessage");
     if (checkLength(document.getElementById("petSector").value, -1, 100)) {
-        sectorError.innerHTML = "Escriba el sector con a lo más 100 caracteres, por favor";
+        sectorError.innerHTML = "Describa el sector con a lo más 100 caracteres, por favor";
         return 1;
     }
     else {
@@ -140,6 +157,10 @@ const handleSectorError = () => {
         return 0;
     }
 };
+
+/* 
+Segundo bloque del formulario 
+*/
 
 const handleNameError = () => {
     let name = document.newPetAd.contactName.value;
@@ -221,13 +242,8 @@ const handlePhoneError = () => {
         phoneError.innerHTML = "El número de teléfono debe empezar por '+569'";
     } else if (phone.length != 12) {
         phoneError.innerHTML = "El número debe tener 11 dígitos, sin espacios entremedio";
-    } else {
-        for (let index = 4; index < 12; index++) {
-            if (!['0','1','2','3','4','5','6','7','8','9'].includes(phone.charAt(index))) {
-                phoneError.innerHTML = "El número debe tener un signo '+' seguido únicamente de caracteres numéricos";
-                break;
-            }
-        }
+    } else if (!isComposedByDigits(phone.substring(4,12))) {
+            phoneError.innerHTML = "El número debe tener un signo '+' seguido únicamente de caracteres numéricos";
     }
     if (phoneError.innerHTML != "") { return 1; }
     
@@ -262,6 +278,84 @@ const handlePlatformsError = () => {
     return output;
 };
 
+/* 
+Tercer bloque del formulario 
+*/
+
+const handleSpeciesError = () => {
+    const species = document.getElementById("petSpecies").value;
+    const error = document.getElementById("petSpeciesErrorMessage");
+    
+    if (species != "perro" && species != "gato") {
+        error.innerHTML = "El animal debe ser un perro o gato; no trabajamos con otras especies";
+        return 1;
+    } 
+    error.innerHTML = "";
+    return 0;
+};
+
+const handleQuantityError = () => {
+    const quantityString = document.getElementById("petQuantity").value;
+    const error = document.getElementById("petQuantityErrorMessage");
+    
+    if (quantityString.length == 0) {
+        error.innerHTML = "Por favor, indique el número de animales";
+        return 1;
+    } 
+    // Implícitamente, esto verifica que sea entero y no negativo, pues no incluye '.', ',' o '-'
+    else if (!isComposedByDigits(quantityString)) {
+        error.innerHTML = "Por favor, use exclusivamente los caracteres del 0 al 9";
+        return 1;
+    }
+    
+    const quantity = parseInt(quantityString);
+    if (quantity == 0) {
+        error.innerHTML = "El número de animales debe ser al menos 1";
+        return 1;
+    }
+    
+    error.innerHTML = "";
+    return 0;
+};
+
+const handleAgeError = () => {
+    const quantityString = document.getElementById("petAge").value;
+    const error = document.getElementById("petAgeErrorMessage");
+    
+    if (quantityString.length == 0) {
+        error.innerHTML = "Por favor, indique la edad del animal";
+        return 1;
+    } 
+    // Implícitamente, esto verifica que sea entero y no negativo, pues no incluye '.', ',' o '-'
+    else if (!isComposedByDigits(quantityString)) {
+        error.innerHTML = "Por favor, use exclusivamente los caracteres del 0 al 9";
+        return 1;
+    }
+    
+    const quantity = parseInt(quantityString);
+    if (quantity == 0) {
+        error.innerHTML = "La edad debe ser al menos 1";
+        return 1;
+    }
+    
+    error.innerHTML = "";
+    return 0;
+}
+
+const handleMeasureError = () => {
+    const species = document.getElementById("petAgeMeasure").value;
+    const error = document.getElementById("petAgeMeasureErrorMessage");
+    
+    if (species != "months" && species != "years") {
+        error.innerHTML = "Por favor, escoja una unidad de tiempo";
+        return 1;
+    } 
+    error.innerHTML = "";
+    return 0;
+};
+
+// El campo "petDescription" no tiene validación; es completamente opcional y sin requisitos
+
 /*  ================
     PROCEDURAL HTML GENERATION
 */
@@ -286,6 +380,7 @@ const generateSocialMediaOptions = () => {
     }
 };
 
+// Similarmente, usaremos JavaScript para proporcionar las opciones de región
 const generateRegionOptions = () => {
     const formRegiones = document.getElementById("petRegion");
     for (const dictRegion of regiones) {
@@ -343,17 +438,25 @@ const dynamicRegionDisplay = () => {
 const validateAdPostData = () => {
     handleCommuneError();
     handleSectorError();
+    
     handleNameError();
     handleEmailError();
     handlePhoneError();
     handlePlatformsError();
+    
+    handleSpeciesError();
+    handleQuantityError();
+    handleAgeError();
+    handleMeasureError();
 };
 
 // Generación del archivo HTML
 generateSocialMediaOptions();
 generateRegionOptions();
 
-// Event listeners
+/* 
+Event listeners 
+*/
 
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
 document.getElementById("sendButton").addEventListener("click", validateAdPostData);
@@ -362,7 +465,9 @@ document.getElementById("contactThroughDiv").addEventListener("change", dynamicU
 // Esto detecta cuando el usuario cambia la región, para cambiar de forma acorde la lista de comunas posibles
 document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
 
-// Valores predeterminados
+/* 
+Valores predeterminados 
+*/
 
 document.getElementById("petRegion").value = "Región del Ñuble";
 dynamicRegionDisplay();
