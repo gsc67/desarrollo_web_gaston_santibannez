@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
     <title>Agregar aviso</title>
     <link rel="stylesheet" href="./main.css">
 </head>
@@ -16,50 +17,50 @@
 </header>
 
 <section>
-    <h1>Agregar aviso de adopción</h1>
+    <h1>Agregar aviso de adopci贸n</h1>
     
-    <p><b>?Sabes de un animalito que necesita un nuevo hogar?</b></p>
+    <p><b>驴Sabes de un animalito que necesita un nuevo hogar?</b></p>
     
     <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo:</p>
     
-    <!-- Despliega un formulario que permite informar un nuevo aviso de perro o gato en adopción. 
+    <!-- Despliega un formulario que permite informar un nuevo aviso de perro o gato en adopci贸n. 
     Debe solicitar los siguientes datos, separados en tres secciones: 
-        1. información del lugar de entrega, 
+        1. informaci贸n del lugar de entrega, 
         2. datos del contacto y 
-        3. la información de los animales en adopción considerando las reglas de validación que se mencionan -->
+        3. la informaci贸n de los animales en adopci贸n considerando las reglas de validaci贸n que se mencionan -->
         
     <form name="newPetAd">
-        <h2>Información de la Mascota</h2>
+        <h2>Informaci贸n de la Mascota</h2>
         
-            <label for="petRegion">Región:</label>
-            <select id="petRegion" name="petRegion"></select> 
+            <label for="petRegion">Regi贸n:</label>
+            <select id="petRegion" name="petRegion"></select> <!--Opciones generadas con JavaScript-->
             <br>
             
             <div id="petToggleComuna" class=hidden>
             <label for="petComuna">Comuna:</label>
-            <select id="petComuna" name="petComuna"></select>
+            <select id="petComuna" name="petComuna"></select> <!--Opciones generadas con JavaScript-->
             <br>
             </div>
         
-        <h2>Información de Contacto</h2>
+        <h2>Informaci贸n de Contacto</h2>
         
             <label for="contactName">Nombre completo: </label>
             <input id="contactName" name="contactName" type="text" size="50">
             <p id="contactNameErrorMessage" class=error></p>
             <br>
             
-            <label for="contactEmail">Correo electrónico: </label>
+            <label for="contactEmail">Correo electr贸nico: </label>
             <input id="contactEmail" name="contactEmail" type="email" size="50">
             <p id="contactEmailErrorMessage" class=error></p>
             <br>
             
-            <label for="contactPhoneNumber">Número telefónico: </label>
+            <label for="contactPhoneNumber">N煤mero telef贸nico: </label>
             <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel">
             <p id="contactPhoneNumberErrorMessage" class=error></p>
             <br>
             
-            <!-- Esta parte del formulario se genera dinámicamente con JavaScript! Funciona! Qué bacán! -->
-            <div id="contactThroughDiv"><p>Otras vías de contacto</p></div>
+            <!-- Esta parte del formulario se genera din谩micamente con JavaScript! Funciona! Qu茅 bac谩n! -->
+            <div id="contactThroughDiv"><p>Otras v铆as de contacto</p></div>
             <br>
         
         <button id="sendAdPostButton" type="button">ENVIAR</button>
