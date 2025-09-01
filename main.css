@@ -12,6 +12,24 @@ p, label {
     font-size: 18px;
 }
 
+h1 {
+    font-family: "Georgia", serif;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Georgia", serif;
+    font-size: 24px;
+}
+
+h3 {
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    font-style: italic;
+}
+
 em { /* ¡énfasis! */
     letter-spacing: 0.055em;
     font-style: italic;
@@ -25,6 +43,10 @@ img {
     height: auto;
     margin-top: 2em;
     margin-bottom: 2em;
+}
+
+table {
+    width: 100%;
 }
 
 /* -----------------------------------------------
@@ -52,22 +74,8 @@ th.navbar_right {
 }
 
 /* -----------------------------------------------
-Estos son elementos estilizados para ciertos usos puntuales, como subsecciones o arte ASCII.
+Clases e IDs
 ----------------------------------------------- */
-
-p.ASCII_art {
-    font-family: monospace;
-    font-size: 0.5em;
-    text-align: center;
-    white-space: pre;
-}
-
-div.centered_box {
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .error {
     font-family: serif;
@@ -82,29 +90,10 @@ div.centered_box {
     display: none;
 }
 
-/* -----------------------------------------------
-Otros estilos no utilizados (aún)
------------------------------------------------ */
-
-h1 {
-    font-family: "Georgia", serif;
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-}
-
-h2 {
-    font-family: "Georgia", serif;
-    font-size: 24px;
-}
-
-h3 {
-    font-family: "Georgia", serif;
-    font-size: 18px;
-    font-style: italic;
-}
-
-table {
-    width: 100%;
-    table-layout: fixed;
+#sendButton {
+    font-size: 1.5em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: block;
 }

@@ -1,4 +1,7 @@
-// --- CONSTANTES ---
+/*  ================ 
+    CONSTANTES GLOBALES
+*/
+
 const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
 
 // Mis más sinceras disculpas por esto: los import me lanzaban un bloqueo porque "CORS Request not HTTP",
@@ -72,14 +75,19 @@ const region_comuna = {
     ]
 };
 
+// No estoy seguro de por qué la información venía así la verdad; ¿cuál es el punto de un mapa con una única llave?
+// Imagino debe haber _algún_ motivo, pero lo desconozco u.u. Por eso, no modifiqué la info.
+// Pero lo que realmente utilizaré es el array dentro de la llave "regiones"
 const regiones = region_comuna["regiones"];
 
-// --- MÉTODOS AUXILIARES ----
+/*  ================
+    MÉTODOS AUXILIARES
+*/
 
-/* Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
-0  <--  En el rango esperado
-1  <--  Más pequeño de lo esperado
-2  <--  Más grande de lo esperado */
+// Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
+// 0  <--  En el rango esperado
+// 1  <--  Más pequeño de lo esperado
+// 2  <--  Más grande de lo esperado
 const checkLength = (elem, min, max) => {
     const len = elem.length;
     if (min > -1 && len < min) { return 1; }
@@ -97,47 +105,12 @@ const findCharacter = (string, character, start = 0) => {
     return -1;
 };
 
-const displayPlatformUsernameBox = (platform) => {
-    let check = document.getElementById("contactThrough" + platform);
-    let label = document.getElementById("contact" + platform + "UserLabel");
-    let username = document.getElementById("contact" + platform + "User");
-    let error = document.getElementById("contact" + platform + "ErrorMessage");
-    if (check.checked) {
-        label.style.display = "inline";
-        username.style.display = "inline";
-        error.style.display = "inline";
-    } else {
-        label.style.display = "none";
-        username.style.display = "none";
-        error.style.display = "none";
-    }
-};
+/*  ================
+    ERROR HANDLERS
+*/
 
-// --- MÉTODOS PRINCIPALES ---
-
-const dynamicUsernameBoxDisplay = () => {
-    supportedContactPlatforms.forEach(displayPlatformUsernameBox);
-};
-
-const dynamicRegionDisplay = () => {
-    const region = document.getElementById("petRegion");
-    let formComunas = document.getElementById("petComuna");
-    formComunas.innerHTML = "";
-    
-    for (const dictRegion of regiones) {
-        if (dictRegion["nombre"] == region.value) {
-            const comunas = dictRegion["comunas"];
-            for (const dictComuna of comunas) {
-                const comuna = dictComuna["nombre"];
-                formComunas.innerHTML += '<option value="' + comuna + '">' + comuna + '</option>';
-            }
-            break;
-        }
-    }
-};
-
+// En general, esta serie de métodos cumple:
 // Retorna 0 para una entrada válida, 1 de lo contrario. 
-// Estándar para toda la serie de funciones "handle[...]Error"
 const handleCommuneError = () => {
     let regionError = document.getElementById("petRegionErrorMessage");
     let comunaError = document.getElementById("petComunaErrorMessage");
@@ -289,6 +262,84 @@ const handlePlatformsError = () => {
     return output;
 };
 
+/*  ================
+    PROCEDURAL HTML GENERATION
+*/
+
+// En vez de llenar el formulario del HTML con campos similares para cada red social, lo haremos con JavaScript.
+// Así, añadir o eliminar una red social es tan sencillo como añadir o eliminar su nombre del array supportedContactPlatforms.
+const generateSocialMediaOptions = () => {
+    const formPlatforms = document.getElementById("contactThroughDiv");
+    for (const platform of supportedContactPlatforms) {
+        formPlatforms.innerHTML += 
+        '<table> <colgroup> ' +
+            '<col style="width: 15em;"> <col style="width: 3em;"> <col style="width: 7em;"> ' +
+        '</colgroup> <tr> ' + 
+            '<td> <label for="contactThrough' + platform + '">' + platform + '</label> </td> ' +
+            '<td> <input id="contactThrough' + platform + '" name="contactThrough" type="checkbox"> </td> ' +
+            '<td> <label id="contact' + platform + 'UserLabel" for="contact' + platform + 'User" class=hidden>Usuario:</label> </td> ' +
+            '<td> <input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30" class=hidden> </td> ' +
+        '</tr> <tr> ' + 
+            '<td> </td> <td> </td> <td> </td> ' +
+            '<td> <p id="contact' + platform + 'ErrorMessage" class=error></p> </td> ' +
+        '</tr> </table>';
+    }
+};
+
+const generateRegionOptions = () => {
+    const formRegiones = document.getElementById("petRegion");
+    for (const dictRegion of regiones) {
+        const region = dictRegion["nombre"];
+        formRegiones.innerHTML += '<option value="' + region + '">' + region + '</option>';
+    }
+};
+
+/*  ================
+    DYNAMIC ELEMENT DISPLAY
+*/
+
+const displayPlatformUsernameBox = (platform) => {
+    const label = document.getElementById("contact" + platform + "UserLabel");
+    const username = document.getElementById("contact" + platform + "User");
+    const error = document.getElementById("contact" + platform + "ErrorMessage");
+    
+    if (document.getElementById("contactThrough" + platform).checked) {
+        label.style.display = "inline";
+        username.style.display = "inline";
+        error.style.display = "inline";
+    } else {
+        label.style.display = "none";
+        username.style.display = "none";
+        error.style.display = "none";
+    }
+};
+
+const dynamicUsernameBoxDisplay = () => {
+    supportedContactPlatforms.forEach(displayPlatformUsernameBox);
+};
+
+const dynamicRegionDisplay = () => {
+    const region = document.getElementById("petRegion");
+    const formComunas = document.getElementById("petComuna");
+    formComunas.innerHTML = "";
+    
+    for (const dictRegion of regiones) {
+        if (dictRegion["nombre"] == region.value) {
+            const comunas = dictRegion["comunas"];
+            for (const dictComuna of comunas) {
+                const comuna = dictComuna["nombre"];
+                formComunas.innerHTML += '<option value="' + comuna + '">' + comuna + '</option>';
+            }
+            break;
+        }
+    }
+};
+
+/*  ================ 
+    MAIN SCRIPT
+*/
+
+// Función validadora del formulario
 const validateAdPostData = () => {
     handleCommuneError();
     handleSectorError();
@@ -298,38 +349,21 @@ const validateAdPostData = () => {
     handlePlatformsError();
 };
 
-// --- HTML DINÁMICO Y EVENT LISTENERS ---
+// Generación del archivo HTML
+generateSocialMediaOptions();
+generateRegionOptions();
+
+// Event listeners
 
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
-let submitButton = document.getElementById("sendAdPostButton");
-submitButton.addEventListener("click", validateAdPostData);
+document.getElementById("sendButton").addEventListener("click", validateAdPostData);
+// Esto detecta cuando se hace click en una de las checkboxs de redes sociales, y hace (des)aparecer la caja de username
+document.getElementById("contactThroughDiv").addEventListener("change", dynamicUsernameBoxDisplay);
+// Esto detecta cuando el usuario cambia la región, para cambiar de forma acorde la lista de comunas posibles
+document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
 
-// En vez de llenar el formulario del HTML con campos similares para cada red social, lo haremos con JS.
-// Así, añadir o eliminar una red social es tan sencillo como añadir o eliminar su nombre del array supportedContactPlatforms.
-let formPlatforms = document.getElementById("contactThroughDiv");
-for (const platform of supportedContactPlatforms) {
-    formPlatforms.innerHTML += '<table> <colgroup> <col style="width: 15em;"> <col style="width: 3em;"> <col style="width: 7em;"></colgroup> ' +
-        '<tr> ' + 
-            '<td> <label for="contactThrough' + platform + '">' + platform + '</label> </td> ' +
-            '<td> <input id="contactThrough' + platform + '" name="contactThrough" type="checkbox"> </td> ' +
-            '<td> <label id="contact' + platform + 'UserLabel" for="contact' + platform + 'User" class=hidden>Usuario:</label> </td> ' +
-            '<td> <input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30" class=hidden> </td> ' +
-        '</tr> <tr> ' + 
-            '<td> </td> <td> </td> <td> </td> ' +
-            '<td> <p id="contact' + platform + 'ErrorMessage" class=error></p> </td> ' +
-        '</tr> </table>';
-}
-formPlatforms.addEventListener("change", dynamicUsernameBoxDisplay);
+// Valores predeterminados
 
-// Análogamente, vamos a agregar las distintas regiones como opciones, y las comunas en función de ellas.
-let formRegiones = document.getElementById("petRegion");
-for (const dictRegion of regiones) {
-    const region = dictRegion["nombre"];
-    formRegiones.innerHTML += '<option value="' + region + '">' + region + '</option>';
-}
-formRegiones.addEventListener("change", dynamicRegionDisplay);
-
-// Además, fijaremos valores predeterminados.
-formRegiones.value = "Región del Ñuble";
+document.getElementById("petRegion").value = "Región del Ñuble";
 dynamicRegionDisplay();
 document.getElementById("petComuna").value = "El Carmen";
