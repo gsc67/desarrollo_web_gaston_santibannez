@@ -7,7 +7,7 @@ body {
     color: black;
 }
 
-p {
+p, label {
     font-family: "Consolas", monospace;
     font-size: 18px;
 }
@@ -74,8 +74,8 @@ div.centered_box {
     font-size: 0.8em;
     color: red;
     font-weight: bold;
-    margin-top: 5px;
-    margin-bottom: -0.8em;
+    margin-top: 0em;
+    margin-bottom: 0em;
 }
 
 .hidden {
@@ -99,12 +99,6 @@ h2 {
 }
 
 h3 {
-    font-family: "Consolas", monospace;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-h6 {
     font-family: "Georgia", serif;
     font-size: 18px;
     font-style: italic;

@@ -99,11 +99,17 @@ const findCharacter = (string, character, start = 0) => {
 
 const displayPlatformUsernameBox = (platform) => {
     let check = document.getElementById("contactThrough" + platform);
-    let userSection = document.getElementById("contactToggle" + platform);
+    let label = document.getElementById("contact" + platform + "UserLabel");
+    let username = document.getElementById("contact" + platform + "User");
+    let error = document.getElementById("contact" + platform + "ErrorMessage");
     if (check.checked) {
-        userSection.style.display = "inline";
+        label.style.display = "inline";
+        username.style.display = "inline";
+        error.style.display = "inline";
     } else {
-        userSection.style.display = "none";
+        label.style.display = "none";
+        username.style.display = "none";
+        error.style.display = "none";
     }
 };
 
@@ -115,27 +121,17 @@ const dynamicUsernameBoxDisplay = () => {
 
 const dynamicRegionDisplay = () => {
     const region = document.getElementById("petRegion");
-    let toggle = document.getElementById("petToggleComuna");
+    let formComunas = document.getElementById("petComuna");
+    formComunas.innerHTML = "";
     
-    if (region.value == null) {
-        toggle.style.display = "none";
-    }
-    else {
-        toggle.style.display = "block";
-        
-        // petComuna tiene que ser escrito dinámicamente
-        let formComunas = document.getElementById("petComuna");
-        formComunas.innerHTML = "";
-        
-        for (const dictRegion of regiones) {
-            if (dictRegion["nombre"] == region.value) {
-                const comunas = dictRegion["comunas"];
-                for (const dictComuna of comunas) {
-                    const comuna = dictComuna["nombre"];
-                    formComunas.innerHTML += '<option value="' + comuna + '">' + comuna + '</option>';
-                }
-                break;
+    for (const dictRegion of regiones) {
+        if (dictRegion["nombre"] == region.value) {
+            const comunas = dictRegion["comunas"];
+            for (const dictComuna of comunas) {
+                const comuna = dictComuna["nombre"];
+                formComunas.innerHTML += '<option value="' + comuna + '">' + comuna + '</option>';
             }
+            break;
         }
     }
 };
@@ -312,13 +308,16 @@ submitButton.addEventListener("click", validateAdPostData);
 // Así, añadir o eliminar una red social es tan sencillo como añadir o eliminar su nombre del array supportedContactPlatforms.
 let formPlatforms = document.getElementById("contactThroughDiv");
 for (const platform of supportedContactPlatforms) {
-    formPlatforms.innerHTML += '<label for="contactThrough' + platform + '">' + platform + '</label>' +
-        '<input id="contactThrough' + platform + '" name="contactThrough" type="checkbox">' +
-        '<div id="contactToggle' + platform + '" class=hidden>' +
-            '<label for="contact' + platform + 'User">Usuario </label>' +
-            '<input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30">' +
-            '<p id="contact' + platform + 'ErrorMessage" class=error></p>' +
-        '</div> <br>';
+    formPlatforms.innerHTML += '<table> <colgroup> <col style="width: 15em;"> <col style="width: 3em;"> <col style="width: 7em;"></colgroup> ' +
+        '<tr> ' + 
+            '<td> <label for="contactThrough' + platform + '">' + platform + '</label> </td> ' +
+            '<td> <input id="contactThrough' + platform + '" name="contactThrough" type="checkbox"> </td> ' +
+            '<td> <label id="contact' + platform + 'UserLabel" for="contact' + platform + 'User" class=hidden>Usuario:</label> </td> ' +
+            '<td> <input id="contact' + platform + 'User" name="contact' + platform + 'User" type="text" size="30" class=hidden> </td> ' +
+        '</tr> <tr> ' + 
+            '<td> </td> <td> </td> <td> </td> ' +
+            '<td> <p id="contact' + platform + 'ErrorMessage" class=error></p> </td> ' +
+        '</tr> </table>';
 }
 formPlatforms.addEventListener("change", dynamicUsernameBoxDisplay);
 

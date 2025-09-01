@@ -25,89 +25,128 @@
         
     <form name="newPetAd">
         <h2>Información de la Locación</h2>
-        
-            <label for="petRegion">Región: </label>
-            <select id="petRegion" name="petRegion"></select> <!--Opciones generadas con JavaScript-->
-            <p id="petRegionErrorMessage" class=error></p>
-            <br>
             
-            <div id="petToggleComuna" class=hidden>
-            <label for="petComuna">Comuna: </label>
-            <select id="petComuna" name="petComuna"></select> <!--Opciones generadas con JavaScript-->
-            <p id="petComunaErrorMessage" class=error></p>
-            <br>
-            </div>
+            <table>
+            <colgroup> <col style="width: 6em;"> </colgroup>
             
-            <label for="petSector">Sector: </label>
-            <input id="petSector" name="petSector" type="text" size="100">
-            <p id="sectorErrorMessage" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="petRegion">Región:</label> </td>
+                <td> <select id="petRegion" name="petRegion"></select> </td> <!--Opciones generadas con JavaScript-->
+            </tr> <tr>
+                <td> </td> <td> <p id="petRegionErrorMessage" class=error></p> </td>
+            </tr>
+            
+            <tr>
+                <td> <label for="petComuna">Comuna:</label> </td>
+                <td> <select id="petComuna" name="petComuna"></select> </td> <!--Opciones generadas con JavaScript-->
+            </tr> <tr>
+                <td> </td> <td> <p id="petComunaErrorMessage" class=error></p> </td>
+            </tr>
+            
+            <tr>
+                <td> <label for="petSector">Sector:</label> </td>
+                <td> <input id="petSector" name="petSector" type="text" size="100"> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="sectorErrorMessage" class=error></p> </td>
+            </tr>
+            
+            </table>
         
         <h2>Información de Contacto</h2>
         
-            <label for="contactName">Nombre completo: </label>
-            <input id="contactName" name="contactName" type="text" size="50">
-            <p id="contactNameErrorMessage" class=error></p>
-            <br>
+            <table>
+            <colgroup> <col style="width: 15em;"> </colgroup>
             
-            <label for="contactEmail">Correo electrónico: </label>
-            <input id="contactEmail" name="contactEmail" type="email" size="50">
-            <p id="contactEmailErrorMessage" class=error></p>
-            <br>
+            <tr> 
+                <td> <label for="contactName">Nombre completo:</label> </td>
+                <td> <input id="contactName" name="contactName" type="text" size="50"> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="contactNameErrorMessage" class=error></p> </td>
+            </tr>
             
-            <label for="contactPhoneNumber">Número telefónico: </label>
-            <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel">
-            <p id="contactPhoneNumberErrorMessage" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="contactEmail">Correo electrónico:</label> </td>
+                <td> <input id="contactEmail" name="contactEmail" type="email" size="50"> </td>
+            </tr> <tr>
+               <td> </td> <td> <p id="contactEmailErrorMessage" class=error></p> </td>
+            </tr>
+            
+            <tr>
+                <td> <label for="contactPhoneNumber">Número telefónico:</label> </td>
+                <td> <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel"> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="contactPhoneNumberErrorMessage" class=error></p> </td>
+            </tr>
+            
+            </table>
             
             <!-- Esta parte del formulario se genera dinámicamente con JavaScript! Funciona! Qué bacán! -->
-            <div id="contactThroughDiv"><p>Otras vías de contacto</p></div>
-            <br>
+            <div id="contactThroughDiv">
+            
+            <h3>Otras vías de contacto</h3>
+            
+            </div>
             
         <h2>Información de la Mascota</h2>
         
-            <label for="petSpecies">Especie: </label>
-            <select id="petSpecies" name="petSpecies">
-                <option value="perro">Perro 🐶</option>
-                <option value="gato">Gato 🐱</option>
-            </select>
-            <p id="petSpeciesErrorMessage" class=error></p>
-            <br>
+            <table>
         
-            <label for="petQuantity">Cantidad: </label>
-            <input id="petQuantity" name="petQuantity" type="number" size="2">
-            <p id="petQuantityErrorMessage" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="petSpecies">Especie:</label> </td>
+                <td> <select id="petSpecies" name="petSpecies">
+                    <option value="perro">Perro 🐶</option>
+                    <option value="gato">Gato 🐱</option>
+                </select> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="petSpeciesErrorMessage" class=error></p> </td>
+            </tr>
         
-            <label for="petAge">Edad: </label>
-            <input id="petAge" name="petAge" type="number" size="2">
-            <select id="petAgeMeasure" name="petAgeMeasure">
-                <option value="months">Meses</option>
-                <option value="years">Años</option>
-            </select>
-            <p id="petAgeErrorMessage" class=error></p>
-            <p id="petAgeMeasureErrorMessage" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="petQuantity">Cantidad: </label> </td>
+                <td> <input id="petQuantity" name="petQuantity" type="number" size="2"> </td>
+            </tr> <tr>
+                <td> <p id="petQuantityErrorMessage" class=error></p> </td>
+            </tr>
         
-            <label for="petDelivery">Fecha disponible para entrega: </label>
-            <input id="petDelivery" name="petDelivery" type="datetime-local">
-            <p id="petDelivery" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="petAge">Edad: </label> </td>
+                <td> <input id="petAge" name="petAge" type="number" size="2">
+                <select id="petAgeMeasure" name="petAgeMeasure">
+                    <option value="months">Meses</option>
+                    <option value="years">Años</option>
+                </select> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="petAgeErrorMessage" class=error></p> </td>
+            </tr> <tr>
+                <td> </td> <td <p id="petAgeMeasureErrorMessage" class=error></p> </td>
+            </tr>
         
-            <label for="petDescription">Descripción: </label>
-            <textarea id="petDescription" name="petDescription" type="text" rows="10" cols="50"></textarea>
-            <p id="petDescriptionErrorMessage" class=error></p>
-            <br>
+            <tr>
+                <td> <label for="petDelivery">Fecha disponible para entrega: </label> </td>
+                <td> <input id="petDelivery" name="petDelivery" type="datetime-local"> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="petDelivery" class=error></p> </td>
+            </tr>
+        
+            <tr>
+                <td> <label for="petDescription">Descripción:</label> </td>
+                <td> <textarea id="petDescription" name="petDescription" type="text" rows="10" cols="50"></textarea> </td>
+            </tr> <tr>
+                <td> </td> <td> <p id="petDescriptionErrorMessage" class=error></p> </td>
+            </tr>
             
-            <label for="petImage1">Fotografías: </label>
+            </table>
+            
+            <label for="petImages">Fotografías:</label>
             <div id="petImages">
                 <input id="petImage1" name="petImage1" type="file">
                 <!-- <button id="petAddPhoto" type="button">Agregar otra foto</button> -->
                 <p id="petImage1ErrorMessage" class=error></p>
             </div>
+            
             <br>
         
-        <button id="sendAdPostButton" type="button">ENVIAR</button>
+        <button id="sendAdPostButton" type="button">Agregar este aviso de adopción</button>
     </form>
     
     <script lang="javascript" src="./postear.js"></script>
