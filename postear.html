@@ -63,6 +63,49 @@
             <!-- Esta parte del formulario se genera dinámicamente con JavaScript! Funciona! Qué bacán! -->
             <div id="contactThroughDiv"><p>Otras vías de contacto</p></div>
             <br>
+            
+        <h2>Información de la Mascota</h2>
+        
+            <label for="petSpecies">Especie: </label>
+            <select id="petSpecies" name="petSpecies">
+                <option value="perro">Perro 🐶</option>
+                <option value="gato">Gato 🐱</option>
+            </select>
+            <p id="petSpeciesErrorMessage" class=error></p>
+            <br>
+        
+            <label for="petQuantity">Cantidad: </label>
+            <input id="petQuantity" name="petQuantity" type="number" size="2">
+            <p id="petQuantityErrorMessage" class=error></p>
+            <br>
+        
+            <label for="petAge">Edad: </label>
+            <input id="petAge" name="petAge" type="number" size="2">
+            <select id="petAgeMeasure" name="petAgeMeasure">
+                <option value="months">Meses</option>
+                <option value="years">Años</option>
+            </select>
+            <p id="petAgeErrorMessage" class=error></p>
+            <p id="petAgeMeasureErrorMessage" class=error></p>
+            <br>
+        
+            <label for="petDelivery">Fecha disponible para entrega: </label>
+            <input id="petDelivery" name="petDelivery" type="datetime-local">
+            <p id="petDelivery" class=error></p>
+            <br>
+        
+            <label for="petDescription">Descripción: </label>
+            <textarea id="petDescription" name="petDescription" type="text" rows="10" cols="50"></textarea>
+            <p id="petDescriptionErrorMessage" class=error></p>
+            <br>
+            
+            <label for="petImage1">Fotografías: </label>
+            <div id="petImages">
+                <input id="petImage1" name="petImage1" type="file">
+                <!-- <button id="petAddPhoto" type="button">Agregar otra foto</button> -->
+                <p id="petImage1ErrorMessage" class=error></p>
+            </div>
+            <br>
         
         <button id="sendAdPostButton" type="button">ENVIAR</button>
     </form>
