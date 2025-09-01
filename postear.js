@@ -160,6 +160,18 @@ const handleCommuneError = () => {
     else { return 1; }
 };
 
+const handleSectorError = () => {
+    let sectorError = document.getElementById("sectorErrorMessage");
+    if (checkLength(document.getElementById("petSector").value, -1, 100)) {
+        sectorError.innerHTML = "Escriba el sector con a lo más 100 caracteres, por favor";
+        return 1;
+    }
+    else {
+        sectorError.innerHTML = "";
+        return 0;
+    }
+};
+
 const handleNameError = () => {
     let name = document.newPetAd.contactName.value;
     let nameError = document.getElementById("contactNameErrorMessage");
@@ -283,6 +295,7 @@ const handlePlatformsError = () => {
 
 const validateAdPostData = () => {
     handleCommuneError();
+    handleSectorError();
     handleNameError();
     handleEmailError();
     handlePhoneError();
