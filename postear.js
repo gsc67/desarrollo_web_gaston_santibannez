@@ -140,8 +140,26 @@ const dynamicRegionDisplay = () => {
     }
 };
 
-// Retorna 0 para un nombre válido, 1 de lo contrario. 
+// Retorna 0 para una entrada válida, 1 de lo contrario. 
 // Estándar para toda la serie de funciones "handle[...]Error"
+const handleCommuneError = () => {
+    let regionError = document.getElementById("petRegionErrorMessage");
+    let comunaError = document.getElementById("petComunaErrorMessage");
+    regionError.innerHTML = "";
+    comunaError.innerHTML = "";
+    
+    if (document.getElementById("petRegion").value == null) {
+        regionError.innerHTML = "Especifique la región, por favor";
+    }
+    
+    if (document.getElementById("petComuna").value == null) {
+        comunaError.innerHTML = "Especifique la comuna, por favor";
+    }
+    
+    if (regionError.innerHTML == "" && comunaError.innerHTML == "") { return 0; }
+    else { return 1; }
+};
+
 const handleNameError = () => {
     let name = document.newPetAd.contactName.value;
     let nameError = document.getElementById("contactNameErrorMessage");
@@ -264,6 +282,7 @@ const handlePlatformsError = () => {
 };
 
 const validateAdPostData = () => {
+    handleCommuneError();
     handleNameError();
     handleEmailError();
     handlePhoneError();

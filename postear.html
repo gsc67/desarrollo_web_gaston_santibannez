@@ -21,18 +21,20 @@
     
     <p><b>¿Sabes de un animalito que necesita un nuevo hogar?</b></p>
     
-    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo:</p>
+    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo 🐶🐱🏡:</p>
         
     <form name="newPetAd">
         <h2>Información de la Mascota</h2>
         
             <label for="petRegion">Región:</label>
             <select id="petRegion" name="petRegion"></select> <!--Opciones generadas con JavaScript-->
+            <p id="petRegionErrorMessage" class=error></p>
             <br>
             
             <div id="petToggleComuna" class=hidden>
             <label for="petComuna">Comuna:</label>
             <select id="petComuna" name="petComuna"></select> <!--Opciones generadas con JavaScript-->
+            <p id="petComunaErrorMessage" class=error></p>
             <br>
             </div>
         
