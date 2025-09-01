@@ -72,6 +72,8 @@ const region_comuna = {
     ]
 };
 
+const regiones = region_comuna["regiones"];
+
 // --- MÉTODOS AUXILIARES ----
 
 /* Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
@@ -109,6 +111,33 @@ const displayPlatformUsernameBox = (platform) => {
 
 const dynamicUsernameBoxDisplay = () => {
     supportedContactPlatforms.forEach(displayPlatformUsernameBox);
+};
+
+const dynamicRegionDisplay = () => {
+    const region = document.getElementById("petRegion");
+    let toggle = document.getElementById("petToggleComuna");
+    
+    if (region.value == null) {
+        toggle.style.display = "none";
+    }
+    else {
+        toggle.style.display = "block";
+        
+        // petComuna tiene que ser escrito dinámicamente
+        let formComunas = document.getElementById("petComuna");
+        formComunas.innerHTML = "";
+        
+        for (const dictRegion of regiones) {
+            if (dictRegion["nombre"] == region.value) {
+                const comunas = dictRegion["comunas"];
+                for (const dictComuna of comunas) {
+                    const comuna = dictComuna["nombre"];
+                    formComunas.innerHTML += '<option value="' + comuna + '">' + comuna + '</option>';
+                }
+                break;
+            }
+        }
+    }
 };
 
 // Retorna 0 para un nombre válido, 1 de lo contrario. 
@@ -261,10 +290,15 @@ for (const platform of supportedContactPlatforms) {
 }
 formPlatforms.addEventListener("change", dynamicUsernameBoxDisplay);
 
-// Análogamente, vamos a agregar las distintas regiones como opciones
-const regiones = region_comuna["regiones"];
+// Análogamente, vamos a agregar las distintas regiones como opciones, y las comunas en función de ellas.
 let formRegiones = document.getElementById("petRegion");
 for (const dictRegion of regiones) {
     const region = dictRegion["nombre"];
     formRegiones.innerHTML += '<option value="' + region + '">' + region + '</option>';
 }
+formRegiones.addEventListener("change", dynamicRegionDisplay);
+
+// Además, fijaremos valores predeterminados.
+formRegiones.value = "Región del Ñuble";
+dynamicRegionDisplay();
+document.getElementById("petComuna").value = "El Carmen";
