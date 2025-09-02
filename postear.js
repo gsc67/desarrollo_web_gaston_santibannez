@@ -590,7 +590,6 @@ const dynamicPhotoDisplay = () => {
     }
 };
 
-
 /*  ================================ 
     MAIN SCRIPT
     ================================ */
@@ -611,8 +610,13 @@ const validateAdPostData = () => {
         handlePhotosError()) {
             console.log("Errors reported in form");
     }
-    else {
-        console.log("No errors in form");
+    else if (confirm("¿Está seguro que desea agregar este aviso de adopción?")) {
+        // En lugar de enviar, limpiamos.
+        document.getElementById("newPetAd").reset();
+        // Mostramos el botón de retorno
+        document.getElementById("goodbye").style.display = "block";
+        // Avisamos el "envío" del forms
+        alert("Hemos recibido la información de adopción, muchas gracias y suerte!");
     }
 };
 
@@ -629,16 +633,21 @@ Event listeners
 
 // Esto detecta cuando se hace click en el botón de envío, y ejecuta la validación.
 document.getElementById("sendButton").addEventListener("click", validateAdPostData);
+
 // Esto detecta cuando se hace click en una de las checkboxs de redes sociales, y hace (des)aparecer la caja de username
 document.getElementById("contactThroughDiv").addEventListener("change", dynamicUsernameBoxDisplay);
+
 // Esto detecta cuando el usuario cambia la región, para cambiar de forma acorde la lista de comunas posibles
 document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
+
 // Estos botones permiten aumentar la cantidad de fotos que se proveen al formulario
 for (index = 1; index < 5; index++) {
     document.getElementById("petAddPhoto" + index).addEventListener("click", addPhotoInput);
 }
+
 // Este botón permite disminuir la cantidad de fotos que se proveen
 document.getElementById("petErasePhoto").addEventListener("click", substractPhotoInput);
+
 // Esto detecta cuando el usuario agrega un archivo, para mostrarle el botón para agregar otro
 for (index = 1; index < 5; index++) {
     document.getElementById("petImage" + index).addEventListener("change", displayAddPhotoButton);
