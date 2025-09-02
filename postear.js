@@ -226,7 +226,7 @@ const handleCommuneError = () => {
 const handleSectorError = () => {
     let sectorError = document.getElementById("sectorErrorMessage");
     if (checkLength(document.getElementById("petSector").value, -1, 100)) {
-        sectorError.innerHTML = "Describa el sector con a lo más 100 caracteres, por favor";
+        sectorError.innerHTML = "Describa el sector en a lo más 100 caracteres, por favor";
         return 1;
     }
     else {
@@ -296,7 +296,7 @@ const handleEmailError = () => {
     const domainPosition = findCharacter(email, '.', atPosition);
     if (domainPosition == atPosition + 1) {
         emailError.innerHTML = "Tu correo tiene un punto inmediatamente después de '@'";
-    } else if (domainPosition == -1) {
+    } else if (domainPosition == -1 || email.length == domainPosition + 1) {
         emailError.innerHTML = "Tu correo no tiene un dominio, como '.com' o '.cl'";
     }
     if (emailError.innerHTML != "") { return 1; }
@@ -597,20 +597,23 @@ const dynamicPhotoDisplay = () => {
 
 // Función validadora del formulario
 const validateAdPostData = () => {
-    handleCommuneError();
-    handleSectorError();
-    
-    handleNameError();
-    handleEmailError();
-    handlePhoneError();
-    handlePlatformsError();
-    
-    handleSpeciesError();
-    handleQuantityError();
-    handleAgeError();
-    handleDeliveryError();
-    handleMeasureError();
-    handlePhotosError();
+    if (handleCommuneError() +
+        handleSectorError() +
+        handleNameError() +
+        handleEmailError() +
+        handlePhoneError() +
+        handlePlatformsError() +
+        handleSpeciesError() +
+        handleQuantityError() +
+        handleAgeError() +
+        handleDeliveryError() +
+        handleMeasureError() +
+        handlePhotosError()) {
+            console.log("Errors reported in form");
+    }
+    else {
+        console.log("No errors in form");
+    }
 };
 
 // Generación del archivo HTML
