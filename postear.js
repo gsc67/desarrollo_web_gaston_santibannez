@@ -1,6 +1,6 @@
-/*  ================ 
+/*  ================================ 
     VARIABLES Y CONSTANTES GLOBALES
-*/
+    ================================ */
 
 let numberOfPhotos = 1;
 
@@ -82,9 +82,10 @@ const region_comuna = {
 // Pero lo que realmente utilizaré es el array dentro de la llave "regiones"
 const regiones = region_comuna["regiones"];
 
-/*  ================
+
+/*  ================================
     MÉTODOS AUXILIARES
-*/
+    ================================ */
 
 // Fije min o max en -1 (o cualquier negativo) para evitar ese chequeo.
 // 0  <--  En el rango esperado
@@ -119,9 +120,61 @@ const isComposedByDigits = (string) => {
     return 1;
 };
 
-/*  ================
+// Toma una string, y la rellena con cierto caracter a su izquierda hasta alcanzar un largo dado
+const padStringLeft = (string, character = '0', len = 2) => {
+    let output = string;
+    while (output.length < len) {
+        output = character + output;
+    }
+    return output;
+}
+
+// Toma una Date de JavaScript, y retorna la conversión al value de una datetime-local en HTML
+const jsDateToHTMLDate = (jsDate) => {
+    // HTML: 2025-09-02T07:00
+    // Cuidado! Los meses van desde 0 a 11 en getMonth()
+    return jsDate.getFullYear() + "-" + padStringLeft((jsDate.getMonth() + 1).toString()) + "-" + padStringLeft(jsDate.getDate().toString()) +
+            "T" + padStringLeft(jsDate.getHours().toString()) + ":" + padStringLeft(jsDate.getMinutes().toString());
+};
+
+// Recibe dos values de datetime-local. Si la primera es (estrictamente) posterior a la segunda, retorna 1. De lo contrario, 0
+const HTMLDateGreaterThan = (date1, date2) => {
+    const check = (firstIndex, lastIndex) => {
+        const number1 = parseInt(date1.substring(firstIndex, lastIndex))
+        const number2 = parseInt(date2.substring(firstIndex, lastIndex))
+        if (number1 > number2) { return 1; }
+        else if (number1 < number2) { return 0; }
+        else { return 2; }
+    };
+    
+    // Año
+    let value = check(0, 4)
+    if (value < 2) { return value; }
+    
+    // Mes
+    value = check(5, 7)
+    if (value < 2) { return value; }
+    
+    // Día
+    value = check(8, 10)
+    if (value < 2) { return value; }
+    
+    // Hora 
+    value = check(11, 13)
+    if (value < 2) { return value; }
+    
+    // Minuto
+    value = check(14, 16)
+    if (value < 2) { return value; }
+    
+    // Son iguales
+    return 0;
+};
+
+
+/*  ================================
     ERROR HANDLERS
-*/
+    ================================ */
 
 // En general, esta serie de métodos cumple:
 // Retorna 0 para una entrada válida, 1 de lo contrario. 
@@ -344,6 +397,18 @@ const handleAgeError = () => {
     return 0;
 }
 
+const handleDeliveryError = () => {
+    let error = document.getElementById("petDeliveryErrorMessage")
+    
+    if (HTMLDateGreaterThan(lowDeadlineHTML, document.getElementById("petDelivery").value)) {
+        error.innerHTML = "Ingrese al menos 3 horas desde que empezó este formulario";
+        return 1;
+    } else {
+        error.innerHTML = "";
+        return 0;
+    }
+};
+
 const handleMeasureError = () => {
     const species = document.getElementById("petAgeMeasure").value;
     const error = document.getElementById("petAgeMeasureErrorMessage");
@@ -375,9 +440,10 @@ const handlePhotosError = () => {
     }
 }
 
-/*  ================
+
+/*  ================================
     PROCEDURAL HTML GENERATION
-*/
+    ================================ */
 
 // En vez de llenar el formulario del HTML con campos similares para cada red social, lo haremos con JavaScript.
 // Así, añadir o eliminar una red social es tan sencillo como añadir o eliminar su nombre del array supportedContactPlatforms.
@@ -408,9 +474,10 @@ const generateRegionOptions = () => {
     }
 };
 
-/*  ================
+
+/*  ================================
     DYNAMIC ELEMENT DISPLAY
-*/
+    ================================*/
 
 const addPhotoInput = () => {
     if (numberOfPhotos < 5) {
@@ -496,9 +563,10 @@ const dynamicPhotoDisplay = () => {
     }
 };
 
-/*  ================ 
+
+/*  ================================ 
     MAIN SCRIPT
-*/
+    ================================ */
 
 // Función validadora del formulario
 const validateAdPostData = () => {
@@ -513,6 +581,7 @@ const validateAdPostData = () => {
     handleSpeciesError();
     handleQuantityError();
     handleAgeError();
+    handleDeliveryError();
     handleMeasureError();
     handlePhotosError();
 };
@@ -550,5 +619,11 @@ Valores predeterminados
 */
 
 document.getElementById("petRegion").value = "Región del Ñuble";
+
 dynamicRegionDisplay();
 document.getElementById("petComuna").value = "El Carmen";
+
+const lowDeadlineJS = new Date();
+lowDeadlineJS.setHours(lowDeadlineJS.getHours() + 3);
+const lowDeadlineHTML = jsDateToHTMLDate(lowDeadlineJS)
+document.getElementById("petDelivery").value = jsDateToHTMLDate(lowDeadlineJS);
