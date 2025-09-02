@@ -171,6 +171,28 @@ const HTMLDateGreaterThan = (date1, date2) => {
     return 0;
 };
 
+const stringIsHTMLDate = (date) => {
+    const year = date.substring(0,4);
+    const month = date.substring(5,7);
+    const day = date.substring(8,10);
+    const hour = date.substring(11,13);
+    const minute = date.substring(14,16);
+    
+    return  date.length == 16 &&
+            isComposedByDigits(year) &&
+            date.charAt(4) == "-" &&
+            isComposedByDigits(month) &&
+            parseInt(month) <= 12 &&
+            date.charAt(7) == "-" &&
+            isComposedByDigits(day) &&
+            parseInt(day) <= 31 &&
+            date.charAt(10) == "T" &&
+            isComposedByDigits(hour) &&
+            parseInt(hour) < 24 &&
+            date.charAt(13) == ":" &&
+            isComposedByDigits(minute) &&
+            parseInt(minute) < 60;
+}
 
 /*  ================================
     ERROR HANDLERS
@@ -398,15 +420,20 @@ const handleAgeError = () => {
 }
 
 const handleDeliveryError = () => {
-    let error = document.getElementById("petDeliveryErrorMessage")
+    const date = document.getElementById("petDelivery").value
+    const error = document.getElementById("petDeliveryErrorMessage")
     
-    if (HTMLDateGreaterThan(lowDeadlineHTML, document.getElementById("petDelivery").value)) {
+    // Cubre también caso de no input
+    if (!stringIsHTMLDate(date)) { 
+        error.innerHTML = "Provea una fecha, por favor";
+        return 1;
+    } else if (HTMLDateGreaterThan(lowDeadlineHTML, date)) {
         error.innerHTML = "Ingrese al menos 3 horas desde que empezó este formulario";
         return 1;
-    } else {
-        error.innerHTML = "";
-        return 0;
     }
+
+    error.innerHTML = "";
+    return 0;
 };
 
 const handleMeasureError = () => {
