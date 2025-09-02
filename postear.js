@@ -1,6 +1,8 @@
 /*  ================ 
-    CONSTANTES GLOBALES
+    VARIABLES Y CONSTANTES GLOBALES
 */
+
+let numberOfPhotos = 1;
 
 const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
 
@@ -356,6 +358,23 @@ const handleMeasureError = () => {
 
 // El campo "petDescription" no tiene validación; es completamente opcional y sin requisitos
 
+const handlePhotosError = () => {
+    // De momento, como no se valida la extensión del archivo, basta revisar la última Foto
+    // Puede usar un for para imponer condiciones sobre todas las fotos
+    const index = 1
+    
+    const photo = document.getElementById("petImage" + index);
+    const error = document.getElementById("petImage" + index + "ErrorMessage");
+        
+    if (photo.value == "" && index == 1) {
+        error.innerHTML = "Provea al menos una imagen, por favor";
+        return 1;
+    } else {
+        error.innerHTML = "";
+        return 0;
+    }
+}
+
 /*  ================
     PROCEDURAL HTML GENERATION
 */
@@ -367,7 +386,7 @@ const generateSocialMediaOptions = () => {
     for (const platform of supportedContactPlatforms) {
         formPlatforms.innerHTML += 
         '<table> <colgroup> ' +
-            '<col style="width: 15em;"> <col style="width: 3em;"> <col style="width: 7em;"> ' +
+            '<col style="width: 7em;"> <col style="width: 2em;"> <col style="width: 6em;"> ' +
         '</colgroup> <tr> ' + 
             '<td> <label for="contactThrough' + platform + '">' + platform + '</label> </td> ' +
             '<td> <input id="contactThrough' + platform + '" name="contactThrough" type="checkbox"> </td> ' +
@@ -393,6 +412,20 @@ const generateRegionOptions = () => {
     DYNAMIC ELEMENT DISPLAY
 */
 
+const addPhotoInput = () => {
+    if (numberOfPhotos < 5) {
+        numberOfPhotos++;
+    }
+    dynamicPhotoDisplay();
+};
+
+const substractPhotoInput = () => {
+    if (numberOfPhotos > 1) {
+        numberOfPhotos--;
+    }
+    dynamicPhotoDisplay();
+};
+
 const displayPlatformUsernameBox = (platform) => {
     const label = document.getElementById("contact" + platform + "UserLabel");
     const username = document.getElementById("contact" + platform + "User");
@@ -406,6 +439,32 @@ const displayPlatformUsernameBox = (platform) => {
         label.style.display = "none";
         username.style.display = "none";
         error.style.display = "none";
+    }
+};
+
+const displayAddPhotoButton = () => {
+    const currPhoto = document.getElementById("petImage" + numberOfPhotos);
+    
+    for (index = 1; index < 5; index++) { // Recuerde que no hay un "petAddPhoto5"
+        const addButton = document.getElementById("petAddPhoto" + index)
+        if (index == numberOfPhotos && currPhoto.files.length != 0) {
+            addButton.style.display = "inline";
+        } else {
+            addButton.style.display = "none";
+        }
+    }
+};
+
+const displayPhotoInput = (index) => {
+    const photoInput = document.getElementById("petImage" + index)
+    const photoError = document.getElementById("petImage" + index + "ErrorMessage")
+    
+    if (index <= numberOfPhotos) {
+        photoInput.style.display = "inline";
+        photoError.style.display = "inline";
+    } else {
+        photoInput.style.display = "none";
+        photoError.style.display = "none";
     }
 };
 
@@ -430,6 +489,13 @@ const dynamicRegionDisplay = () => {
     }
 };
 
+const dynamicPhotoDisplay = () => {
+    displayAddPhotoButton();
+    for (index = 1; index < 6; index++) {
+        displayPhotoInput(index);
+    }
+};
+
 /*  ================ 
     MAIN SCRIPT
 */
@@ -448,11 +514,15 @@ const validateAdPostData = () => {
     handleQuantityError();
     handleAgeError();
     handleMeasureError();
+    handlePhotosError();
 };
 
 // Generación del archivo HTML
 generateSocialMediaOptions();
 generateRegionOptions();
+
+dynamicUsernameBoxDisplay();
+dynamicPhotoDisplay();
 
 /* 
 Event listeners 
@@ -464,6 +534,16 @@ document.getElementById("sendButton").addEventListener("click", validateAdPostDa
 document.getElementById("contactThroughDiv").addEventListener("change", dynamicUsernameBoxDisplay);
 // Esto detecta cuando el usuario cambia la región, para cambiar de forma acorde la lista de comunas posibles
 document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
+// Estos botones permiten aumentar la cantidad de fotos que se proveen al formulario
+for (index = 1; index < 5; index++) {
+    document.getElementById("petAddPhoto" + index).addEventListener("click", addPhotoInput);
+}
+// Este botón permite disminuir la cantidad de fotos que se proveen
+document.getElementById("petErasePhoto").addEventListener("click", substractPhotoInput);
+// Esto detecta cuando el usuario agrega un archivo, para mostrarle el botón para agregar otro
+for (index = 1; index < 5; index++) {
+    document.getElementById("petImage" + index).addEventListener("change", displayAddPhotoButton);
+}
 
 /* 
 Valores predeterminados 
