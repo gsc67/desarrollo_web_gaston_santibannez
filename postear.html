@@ -27,7 +27,7 @@
         <h2>Información de la Locación</h2>
             
             <table>
-            <colgroup> <col style="width: 6em;"> </colgroup>
+            <colgroup> <col style="width: 6em;"> <col> </colgroup>
             
             <tr>
                 <td> <label for="petRegion">Región:</label> </td>
@@ -55,7 +55,7 @@
         <h2>Información de Contacto</h2>
         
             <table>
-            <colgroup> <col style="width: 13em;"> </colgroup>
+            <colgroup> <col style="width: 13em;"> <col> </colgroup>
             
             <tr> 
                 <td> <label for="contactName">Nombre completo:</label> </td>
@@ -90,7 +90,7 @@
         <h2>Información de la Mascota</h2>
         
             <table>
-            <colgroup> <col style="width: 8em;"> </colgroup>
+            <colgroup> <col style="width: 8em;"> <col> </colgroup>
         
             <tr>
                 <td> <label for="petSpecies">Especie:</label> </td>
@@ -104,14 +104,14 @@
         
             <tr>
                 <td> <label for="petQuantity">Cantidad:</label> </td>
-                <td> <input id="petQuantity" name="petQuantity" type="number" size="2"> </td>
+                <td> <input id="petQuantity" name="petQuantity" type="number"> </td>
             </tr> <tr>
                 <td> </td> <td> <p id="petQuantityErrorMessage" class=error></p> </td>
             </tr>
         
             <tr>
                 <td> <label for="petAge">Edad:</label> </td>
-                <td> <input id="petAge" name="petAge" type="number" size="2">
+                <td> <input id="petAge" name="petAge" type="number">
                 <select id="petAgeMeasure" name="petAgeMeasure">
                     <option value="months">Meses</option>
                     <option value="years">Años</option>
@@ -123,7 +123,7 @@
             </tr>
             
             </table> <table>
-            <colgroup> <col style="width: 21em;"> </colgroup>
+            <colgroup> <col style="width: 21em;"> <col> </colgroup>
         
             <tr>
                 <td> <label for="petDelivery">Fecha disponible para entrega: </label> </td>
@@ -147,7 +147,7 @@
             </tr> 
             
             </table> <table id="petImages">
-            <colgroup> <col style="width: 21em;"> </colgroup>
+            <colgroup> <col style="width: 21em;"> <col> </colgroup>
             
             <!-- Originalmente apunté a ir generando esta tabla dinámicamente con JavaScript.
             Es una idea entretenida, pero cuando se reescribían ciertos datos se estaban borrando los inputs ya ingresados,
@@ -158,34 +158,34 @@
                 <td> <input id="petImage1" name="petImage1" type="file"> </td>
                 <td> <button id="petAddPhoto1" type="button">Agregar otra foto</button> </td>
             </tr> <tr>
-                <td> <p id="petImage1ErrorMessage" class=error></p> </td>
+                <td colspan="2"> <p id="petImage1ErrorMessage" class=error></p> </td>
             </tr>
             
             <tr>
                 <td> <input id="petImage2" name="petImage2" type="file"> </td>
                 <td> <button id="petAddPhoto2" type="button">Agregar otra foto</button> </td>
             </tr> <tr>
-                <td> <p id="petImage2ErrorMessage" class=error></p> </td>
+                <td colspan="2"> <p id="petImage2ErrorMessage" class=error></p> </td>
             </tr>
             
             <tr>
                 <td> <input id="petImage3" name="petImage3" type="file"> </td>
                 <td> <button id="petAddPhoto3" type="button">Agregar otra foto</button> </td>
             </tr> <tr>
-                <td> <p id="petImage3ErrorMessage" class=error></p> </td>
+                <td colspan="2"> <p id="petImage3ErrorMessage" class=error></p> </td>
             </tr>
             
             <tr>
                 <td> <input id="petImage4" name="petImage4" type="file"> </td>
                 <td> <button id="petAddPhoto4" type="button">Agregar otra foto</button> </td>
             </tr> <tr>
-                <td> <p id="petImage4ErrorMessage" class=error></p> </td>
+                <td colspan="2"> <p id="petImage4ErrorMessage" class=error></p> </td>
             </tr>
             
             <tr>
-                <td> <input id="petImage5" name="petImage5" type="file"> </td>
+                <td> <input id="petImage5" name="petImage5" type="file"> </td> <td> </td>
             </tr> <tr>
-                <td> <p id="petImage5ErrorMessage" class=error></p> </td>
+                <td colspan="2"> <p id="petImage5ErrorMessage" class=error></p> </td>
             </tr>
             
             </table>
