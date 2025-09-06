@@ -150,3 +150,17 @@ Clases e IDs
     margin-top: auto;
     margin-bottom: auto;
 }
+
+/* Misma decisión respecto al tamaño de imágenes que en el bloque anterior */
+img.detailedAd {
+    max-width: 320px; 
+    max-height: 240px; 
+    display: inline;
+}
+
+p.ASCII_art {
+    font-family: monospace;
+    text-align: center;
+    white-space: pre;
+    background-color: white;
+}
