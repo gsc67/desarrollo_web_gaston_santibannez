@@ -152,10 +152,15 @@ Clases e IDs
 }
 
 /* Misma decisión respecto al tamaño de imágenes que en el bloque anterior */
-img.detailedAd {
+img.detailedAdSmall {
     max-width: 320px; 
     max-height: 240px; 
     display: inline;
+}
+
+img.detailedAdBig {
+    max-width: 800px; 
+    max-height: 600px; 
 }
 
 p.ASCII_art {

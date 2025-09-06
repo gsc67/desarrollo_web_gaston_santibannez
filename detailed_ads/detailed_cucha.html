@@ -16,11 +16,22 @@
 <section>
     
     <!-- Misma decisión respecto al tamaño de imágenes que en listado.html -->
-    <div style="text-align: center;">
-        <img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto" class=detailedAd>
-        <img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto" class=detailedAd>
+    <div style="text-align: center;" id="div1">
+        <img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto" class=detailedAdSmall id="img1">
+        <img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto" class=detailedAdSmall id="img2">
     </div>
     
+    <!-- Usaré un truco MUY sucio porque estoy sin ideas ni tiempo.
+    Al hacerle click a una imagen, ocultaré TODO el sitio web usando JavaScript, salvo una versión grande de la imagen precargada y un botón.
+    Al hacerle click al botón, volveré a ocultar esos dos elementos y mostrar todas las otras cosas. -->
+    <div id="div2"> <table style="width: 800px; margin: auto;">
+        <tr><td style="text-align: right; white-space: pre;"><button type="button" id="closeButton"> X </button></td></tr>
+        <tr><td><span id="img1_2"><img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto, grande" class=detailedAdBig></span></td></tr>
+        <tr><td><span id="img2_2"><img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto, grande" class=detailedAdBig></span></td></tr>
+        </tr>
+    </table> </div>
+    
+    <div id="div3">
     <table class=adList>
         
         <colgroup> 
@@ -100,9 +111,10 @@
 ( °w° )                                    </p>
     
     <br>
+    </div>
 </section>
 
-<section> <!-- navbar -->
+<section id="div4"> <!-- navbar -->
     <nav> <table class=navbar> <tr>
         <th class=navbar_left><a href="../listado.html">Listado</a></th>
         <th class=navbar_right><a href="../index.html">Inicio</a></th>
@@ -110,6 +122,8 @@
     
     <br>
 </section>
+
+<script src="./detailed_cucha.js"></script>
 
 </body>
 </html>
