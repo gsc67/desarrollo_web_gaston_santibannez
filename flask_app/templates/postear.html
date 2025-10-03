@@ -3,191 +3,237 @@
 {% block title %} Agregar aviso {% endblock %}
 
 {% block navrow %}
-    <th class=navbar_center><a href="..">Inicio</a></th>
+    <th class=navbar_center><a href="../">Inicio</a></th>
 {% endblock %}
 
 {% block header %}
-    <hr>
-    <h1>Agregar aviso de adopción</h1>
-    <p><strong>?Sabes de un animalito que necesita un nuevo hogar?</strong></p>
+    <h1>Agregar aviso de adopci&oacute;n</h1>
+    <p><strong>&iquest;Sabes de un animalito que necesita un nuevo hogar?</strong></p>
     <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo &#x1F436;&#x1F431;&#x1F3E1;:</p>
 {% endblock %}
 
 {% block main %}
     <form name="newPetAd" id="newPetAd">
-        <h2>Informaci贸n de la Locaci贸n</h2>
+        <section>
+            <h2>Informaci&oacute;n de la Locaci&oacute;n</h2>
             
             <table>
-            <colgroup> <col style="width: 6em;"> <col> </colgroup>
+                <colgroup>
+                    <col style="width: 6em;">
+                    <col>
+                </colgroup>
             
-            <tr>
-                <td> <label for="petRegion">Regi贸n:</label> </td>
-                <td> <select id="petRegion" name="petRegion"></select> </td> <!--Opciones generadas con JavaScript-->
-            </tr> <tr>
-                <td> </td> <td> <p id="petRegionErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <label for="petComuna">Comuna:</label> </td>
-                <td> <select id="petComuna" name="petComuna"></select> </td> <!--Opciones generadas con JavaScript-->
-            </tr> <tr>
-                <td> </td> <td> <p id="petComunaErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <label for="petSector">Sector:</label> </td>
-                <td> <input id="petSector" name="petSector" type="text" size="100"> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="sectorErrorMessage" class=error></p> </td>
-            </tr>
-            
+                <tr>
+                    <td><label for="petRegion">Regi&oacute;n:</label></td>
+                    <td><select id="petRegion" name="petRegion">{# TODO: SQL #}</select></td>
+                </tr> 
+                <tr>
+                    <td></td> 
+                    <td><p id="petRegionErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="petComuna">Comuna:</label></td>
+                    <td><select id="petComuna" name="petComuna"></select></td>
+                </tr>
+                <tr>
+                    <td></td> 
+                    <td><p id="petComunaErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="petSector">Sector:</label></td>
+                    <td><input id="petSector" name="petSector" type="text" size="100"></td>
+                </tr>
+                <tr>
+                    <td></td> 
+                    <td><p id="sectorErrorMessage" class=error></p></td>
+                </tr>
             </table>
+        </section>
         
-        <h2>Informaci贸n de Contacto</h2>
+        <section>
+            <h2>Informaci&oacute;n de Contacto</h2>
         
             <table>
-            <colgroup> <col style="width: 13em;"> <col> </colgroup>
+                <colgroup> 
+                    <col style="width: 13em;"> 
+                    <col>
+                </colgroup>
             
-            <tr> 
-                <td> <label for="contactName">Nombre completo:</label> </td>
-                <td> <input id="contactName" name="contactName" type="text" size="50"> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="contactNameErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <label for="contactEmail">Correo electr贸nico:</label> </td>
-                <td> <input id="contactEmail" name="contactEmail" type="email" size="50"> </td>
-            </tr> <tr>
-               <td> </td> <td> <p id="contactEmailErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <label for="contactPhoneNumber">N煤mero telef贸nico:</label> </td>
-                <td> <input id="contactPhoneNumber" name="contactPhoneNumber" type="tel"> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="contactPhoneNumberErrorMessage" class=error></p> </td>
-            </tr>
-            
+                <tr> 
+                    <td><label for="contactName">Nombre completo:</label></td>
+                    <td><input id="contactName" name="contactName" type="text" size="50"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="contactNameErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="contactEmail">Correo electr&oacute;nico:</label></td>
+                    <td><input id="contactEmail" name="contactEmail" type="email" size="50"></td>
+                </tr>
+                <tr>
+                   <td></td>
+                   <td><p id="contactEmailErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="contactPhoneNumber">N&uacute;mero telef&oacute;nico:</label></td>
+                    <td><input id="contactPhoneNumber" name="contactPhoneNumber" type="tel"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="contactPhoneNumberErrorMessage" class=error></p></td>
+                </tr>
             </table>
+        </section>
             
-            <!-- Esta parte del formulario se genera din谩micamente con JavaScript! Funciona! Qu茅 bac谩n! -->
+        <section>
             <div id="contactThroughDiv">
-            
-            <h3>Otras v铆as de contacto</h3>
-            
+                <h3>Otras v&iacute;as de contacto</h3>
             </div>
-            
-        <h2>Informaci贸n de la Mascota</h2>
+        </section>
+        
+        <section>
+            <h2>Informaci&oacute;n de la Mascota</h2>
         
             <table>
-            <colgroup> <col style="width: 8em;"> <col> </colgroup>
+                <colgroup>
+                    <col style="width: 8em;">
+                    <col>
+                </colgroup>
         
-            <tr>
-                <td> <label for="petSpecies">Especie:</label> </td>
-                <td> <select id="petSpecies" name="petSpecies">
-                    <option value="perro">Perro 馃惗</option>
-                    <option value="gato">Gato 馃惐</option>
-                </select> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petSpeciesErrorMessage" class=error></p> </td>
-            </tr>
+                <tr>
+                    <td><label for="petSpecies">Especie:</label></td>
+                    <td>
+                        <select id="petSpecies" name="petSpecies">
+                            <option value="perro">Perro &#x1F436;</option>
+                            <option value="gato">Gato &#x1F431;</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petSpeciesErrorMessage" class=error></p></td>
+                </tr>
         
-            <tr>
-                <td> <label for="petQuantity">Cantidad:</label> </td>
-                <td> <input id="petQuantity" name="petQuantity" type="number"> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petQuantityErrorMessage" class=error></p> </td>
-            </tr>
-        
-            <tr>
-                <td> <label for="petAge">Edad:</label> </td>
-                <td> <input id="petAge" name="petAge" type="number">
-                <select id="petAgeMeasure" name="petAgeMeasure">
-                    <option value="months">Meses</option>
-                    <option value="years">A帽os</option>
-                </select> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petAgeErrorMessage" class=error></p> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petAgeMeasureErrorMessage" class=error></p> </td>
-            </tr>
+                <tr>
+                    <td><label for="petQuantity">Cantidad:</label></td>
+                    <td><input id="petQuantity" name="petQuantity" type="number"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petQuantityErrorMessage" class=error></p></td>
+                </tr>
             
-            </table> <table>
-            <colgroup> <col style="width: 21em;"> <col> </colgroup>
-        
-            <tr>
-                <td> <label for="petDelivery">Fecha disponible para entrega: </label> </td>
-                <td> <input id="petDelivery" name="petDelivery" type="datetime-local"> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petDeliveryErrorMessage" class=error></p> </td>
-            </tr>
-        
-            <tr>
-                <td> <label for="petDescription">Descripci贸n:</label> </td>
-                <!-- Agregando '''style="resize: none;"''' en el tag textarea puedes hacer que no se pueda modificar el tama帽o.
-                Permitir que se pueda cambiar el tama帽o de la caja es una decisi贸n deliberada de dise帽o -->
-                <td> <textarea id="petDescription" name="petDescription" rows="10" cols="50"></textarea> </td>
-            </tr> <tr>
-                <td> </td> <td> <p id="petDescriptionErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <label for="petErasePhoto">Fotograf铆as:</label> </td>
-                <td> <button id="petErasePhoto" type="button">Eliminar 煤ltima foto</button> </td>
-            </tr> 
-            
-            </table> <table id="petImages">
-            <colgroup> <col style="width: 21em;"> <col> </colgroup>
-            
-            <!-- Originalmente apunt茅 a ir generando esta tabla din谩micamente con JavaScript.
-            Es una idea entretenida, pero cuando se reescrib铆an ciertos datos se estaban borrando los inputs ya ingresados,
-            lo que es inc贸modo. Se debe poder solucionar, pero se me ocurri贸 esta otra implementaci贸n: la tabla siempre existe,
-            pero se activa/desactiva seg煤n las acciones del usuario -->
-            
-            <tr>
-                <td> <input id="petImage1" name="petImage1" type="file"> </td>
-                <td> <button id="petAddPhoto1" type="button">Agregar otra foto</button> </td>
-            </tr> <tr>
-                <td colspan="2"> <p id="petImage1ErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <input id="petImage2" name="petImage2" type="file"> </td>
-                <td> <button id="petAddPhoto2" type="button">Agregar otra foto</button> </td>
-            </tr> <tr>
-                <td colspan="2"> <p id="petImage2ErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <input id="petImage3" name="petImage3" type="file"> </td>
-                <td> <button id="petAddPhoto3" type="button">Agregar otra foto</button> </td>
-            </tr> <tr>
-                <td colspan="2"> <p id="petImage3ErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <input id="petImage4" name="petImage4" type="file"> </td>
-                <td> <button id="petAddPhoto4" type="button">Agregar otra foto</button> </td>
-            </tr> <tr>
-                <td colspan="2"> <p id="petImage4ErrorMessage" class=error></p> </td>
-            </tr>
-            
-            <tr>
-                <td> <input id="petImage5" name="petImage5" type="file"> </td> <td> </td>
-            </tr> <tr>
-                <td colspan="2"> <p id="petImage5ErrorMessage" class=error></p> </td>
-            </tr>
-            
+                <tr>
+                    <td><label for="petAge">Edad:</label></td>
+                    <td>
+                        <input id="petAge" name="petAge" type="number">
+                        <select id="petAgeMeasure" name="petAgeMeasure">
+                            <option value="months">Meses</option>
+                            <option value="years">A&ntilde;os</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petAgeErrorMessage" class=error></p></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petAgeMeasureErrorMessage" class=error></p></td>
+                </tr>
             </table>
+            
+            <table>
+                <colgroup>
+                    <col style="width: 21em;">
+                    <col>
+                </colgroup>
         
-        <button id="sendButton" type="button">Agregar este aviso de adopci贸n</button>
+                <tr>
+                    <td><label for="petDelivery">Fecha disponible para entrega: </label></td>
+                    <td><input id="petDelivery" name="petDelivery" type="datetime-local"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petDeliveryErrorMessage" class=error></p></td>
+                </tr>
+        
+                <tr>
+                    <td><label for="petDescription">Descripci&oacute;n:</label></td>
+                    <td><textarea id="petDescription" name="petDescription" rows="10" cols="50"></textarea></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><p id="petDescriptionErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="petErasePhoto">Fotograf&iacute;as:</label></td>
+                    <td><button id="petErasePhoto" type="button">Eliminar &uacute;ltima foto</button></td>
+                </tr> 
+                
+            </table>
+            
+            <table id="petImages">
+                <colgroup>
+                    <col style="width: 21em;">
+                    <col>
+                </colgroup>
+            
+                <tr>
+                    <td><input id="petImage1" name="petImage1" type="file"></td>
+                    <td><button id="petAddPhoto1" type="button">Agregar otra foto</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p id="petImage1ErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><input id="petImage2" name="petImage2" type="file"></td>
+                    <td><button id="petAddPhoto2" type="button">Agregar otra foto</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p id="petImage2ErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><input id="petImage3" name="petImage3" type="file"></td>
+                    <td><button id="petAddPhoto3" type="button">Agregar otra foto</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p id="petImage3ErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><input id="petImage4" name="petImage4" type="file"></td>
+                    <td><button id="petAddPhoto4" type="button">Agregar otra foto</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p id="petImage4ErrorMessage" class=error></p></td>
+                </tr>
+                
+                <tr>
+                    <td><input id="petImage5" name="petImage5" type="file"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p id="petImage5ErrorMessage" class=error></p></td>
+                </tr>
+            </table>
+        </section>
+        
+        <button id="sendButton" type="button">Agregar este aviso de adopci&oacute;n</button>
     </form>
 {% endblock %}
 
 {% block footer %}
     <section id="goodbye" class=hidden style="text-align: center;">
-        <h2 style="text-align: center;"><a href="..">Regresar a la página principal</a></h2>
+        <h2 style="text-align: center;"><a href="../">Regresar a la p&aacute;gina principal</a></h2>
     </section>
 {% endblock %}
 
