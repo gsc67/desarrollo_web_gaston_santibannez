@@ -1,28 +1,19 @@
-<!DOCTYPE HTML>
-<html lang="es">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar aviso</title>
-    <link rel="stylesheet" href="./main.css">
-</head>
+{% block title %} Agregar aviso {% endblock %}
 
-<body>
+{% block navrow %}
+    <th class=navbar_center><a href="..">Inicio</a></th>
+{% endblock %}
 
-<header>
-    <nav> <table class=navbar> <tr>
-        <th class=navbar_center><a href="./index.html">Inicio</a></th>
-    </tr> </table> </nav>
+{% block header %}
     <hr>
-</header>
+    <h1>Agregar aviso de adopción</h1>
+    <p><strong>?Sabes de un animalito que necesita un nuevo hogar?</strong></p>
+    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo &#x1F436;&#x1F431;&#x1F3E1;:</p>
+{% endblock %}
 
-<section>
-    <h1>Agregar aviso de adopci贸n</h1>
-    
-    <p><b>驴Sabes de un animalito que necesita un nuevo hogar?</b></p>
-    
-    <p>Por favor, rellena este formulario para que juntos podamos buscarle un nuevo techo 馃惗馃惐馃彙:</p>
-        
+{% block main %}
     <form name="newPetAd" id="newPetAd">
         <h2>Informaci贸n de la Locaci贸n</h2>
             
@@ -192,13 +183,14 @@
         
         <button id="sendButton" type="button">Agregar este aviso de adopci贸n</button>
     </form>
-    
-    <script src="./postear.js"></script>
-</section>
+{% endblock %}
 
-<section id="goodbye" class=hidden style="text-align: center;">
-    <h2 style="text-align: center;"><a href="./index.html">Regresar a la p谩gina principal</a></h2>
-</section>
+{% block footer %}
+    <section id="goodbye" class=hidden style="text-align: center;">
+        <h2 style="text-align: center;"><a href="..">Regresar a la página principal</a></h2>
+    </section>
+{% endblock %}
 
-</body>
-</html>
+{% block scripts %}
+    <script src="static/js/postear.js"></script>
+{% endblock %}        
