@@ -1,26 +1,17 @@
-<!DOCTYPE HTML>
-<html lang="es">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Listado de avisos</title>
-    <link rel="stylesheet" href="./main.css">
-</head>
+{% block title %} Listado de avisos {% endblock %}
 
-<body>
+{% block navrow %}
+    <th class=navbar_center><a href="../">Inicio</a></th>
+{% endblock %}
 
-<header>
-    <nav> <table class=navbar> <tr>
-        <th class=navbar_center><a href="./index.html">Inicio</a></th>
-    </tr> </table> </nav>
-    <hr>
-</header>
-
-<section>
+{% block header %}
     <h1>Listado de avisos de adopción</h1>
-    
+{% endblock %}
+
+{% block main %}
     <table class=adList>
-        
         <colgroup> 
             <col style="width: 6em;"> 
             <col style="width: 6em;"> 
@@ -31,73 +22,27 @@
             <col style="width: 320px;">
         </colgroup>
         
-        <thead> <tr>
-            <th>Fecha Publicación</th>
-            <th>Fecha Entrega</th>
-            <th>Comuna</th>
-            <th>Sector</th>
-            <th>Datos</th> <!-- Cantidad/Tipo/Edad -->
-            <th>Nombre Contacto</th>
-            <th>Fotos</th>
-        </tr> </thead>
+        <thead>
+            <tr>
+                <th>Fecha Publicación</th>
+                <th>Fecha Entrega</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Datos</th> <!-- Cantidad/Tipo/Edad -->
+                <th>Nombre Contacto</th>
+                <th>Fotos</th>
+            </tr>
+        </thead>
         
         <tbody> 
-            <tr onclick="location.href='./detailed_ads/detailed_cucha.html';">
-            <td>2024-11-01 15:00</td>
-            <td>2024-11-01 22:00</td>
-            <td>Macul</td>
-            <td>Campus San Joaquín</td>
-            <td>1 gatita de 3 años</td>
-            <td>Major Tom</td>
-            <td><img src="./imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto">
-                <img src="./imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto"></td>
-            </tr> 
-            
-            <tr onclick="location.href='./detailed_ads/detailed_cucha.html';">
-            <td>2022-10-22 12:00</td>
-            <td>2022-10-22 15:00</td>
-            <td>El Carmen</td>
-            <td>Plaza de armas</td>
-            <td>1 gatita de 9 años</td>
-            <td>Ziggy Stardust</td>
-            <td><img src="./imgs/cat_chikorita.jpeg" alt="Gatita Chikorita, primera foto"></td>
-            </tr> 
-            
-            <tr onclick="location.href='./detailed_ads/detailed_cucha.html';">
-            <td>2024-12-28 12:00</td>
-            <td>2024-12-28 15:00</td>
-            <td>Huechuraba</td>
-            <td>Supermercado Santa Isabel, avenida El Carmen con Pedro Fontova Norte</td>
-            <td>1 perrito de 4 años</td>
-            <td>Aladdin Sane</td>
-            <td><img src="./imgs/dog_manolo.jpeg" alt="Perrito Manolo, primera foto"></td>
-            </tr>  
-            
-            <tr onclick="location.href='./detailed_ads/detailed_cucha.html';">
-            <td>2021-12-11 12:00</td>
-            <td>2025-04-20 12:00</td>
-            <td>Antofagasta</td>
-            <td>Pastelería <em>Masitas</em></td> <!-- Oh no, el usuario insertó código HTML. Terrible. -->
-            <td>1 gatito de 3 meses</td>
-            <td>Thin White Duke</td>
-            <td><img src="./imgs/cat_KEANU.jpg" alt="Gatito Keanu, primera foto"></td>
-            </tr> 
-            
-            <tr onclick="location.href='./detailed_ads/detailed_cucha.html';">
-            <td>2022-04-04 19:00</td>
-            <td>2022-07-09 18:00</td>
-            <td>Santiago</td>
-            <td>Plaza de la Constitución, Morandé con Agustinas</td>
-            <td>1 perrito de 3 años</td>
-            <td>Blind Prophet</td>
-            <td><img src="./imgs/dog_pancho.jpeg" alt="Perrito Pancho, primera foto"></td>
-            </tr>
+            {# for something something crear cuerpo de la tabla #}
         </tbody>
-    
     </table>
-    
-    <br>
-</section>
+{% endblock %}
 
-</body>
-</html>
+{% block footer %}
+    <br>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
