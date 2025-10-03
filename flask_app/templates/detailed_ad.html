@@ -1,29 +1,24 @@
-<!DOCTYPE HTML>
-<html lang="es">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <title>EN ADOPCIÓN: Cucha</title>
-    <link rel="stylesheet" href="../main.css">
-</head>
+{% block title %} EN ADOPCIÓN: _todo_{# nombre mascota #} {% endblock %}
 
-<body>
+{% block navrow %}
+{% endblock %}
 
-<header>
-    <h1>EN ADOPCIÓN - Cucha</h1>
-</header>
+{% block header %}
+    <h1>EN ADOPCIÓN - _todo_{# nombre mascota #}</h1>
+{% endblock %}
 
-<section>
+{% block main %}
+    {# aún no sé SQL #}
+    <!--
+    <section>
     
-    <!-- Misma decisión respecto al tamaño de imágenes que en listado.html -->
     <div style="text-align: center;" id="div1">
         <img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto" class=detailedAdSmall id="img1">
         <img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto" class=detailedAdSmall id="img2">
     </div>
     
-    <!-- Usaré un truco MUY sucio porque estoy sin ideas ni tiempo.
-    Al hacerle click a una imagen, ocultaré TODO el sitio web usando JavaScript, salvo una versión grande de la imagen precargada y un botón.
-    Al hacerle click al botón, volveré a ocultar esos dos elementos y mostrar todas las otras cosas. -->
     <div id="div2"> <table style="width: 800px; margin: auto;">
         <tr><td style="text-align: right; white-space: pre;"><button type="button" id="closeButton"> X </button></td></tr>
         <tr><td><span id="img1_2"><img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto, grande" class=detailedAdBig></span></td></tr>
@@ -112,17 +107,19 @@
     <br>
     </div>
 </section>
+    -->
+{% endblock %}
 
-<div id="div4"> <!-- navbar -->
-    <nav> <table class=navbar> <tr>
-        <th class=navbar_left><a href="../listado.html">Listado</a></th>
-        <th class=navbar_right><a href="../index.html">Inicio</a></th>
-    </tr> </table> </nav>
-    
-    <br>
-</div>
+{% block footer %}
+    <div id="div4"> <!-- navbar -->
+        <nav> <table class=navbar> <tr>
+            <th class=navbar_left><a href="../listado/">Listado</a></th>
+            <th class=navbar_right><a href="..">Inicio</a></th>
+        </tr> </table> </nav>
+        <br>
+    </div>
+{% endblock %}
 
-<script src="./detailed_cucha.js"></script>
-
-</body>
-</html>
+{% block scripts %}
+    <script src="static/js/detailed_ad.js"></script>
+{% endblock %}
