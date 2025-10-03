@@ -1,1 +1,4 @@
-tarea2_archivos/
+flask_app/__pycache__/
+flask_app/database/
+flask_app/static/
+flask_app/utils/
