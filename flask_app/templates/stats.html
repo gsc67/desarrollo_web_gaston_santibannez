@@ -1,41 +1,30 @@
-<!DOCTYPE HTML>
-<html lang="es">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Estadísticas</title>
-    <link rel="stylesheet" href="./main.css">
-</head>
+{% block title %} Estadísticas {% endblock %}
 
-<body>
+{% block navrow %}
+    <th class=navbar_center><a href="..">Inicio</a></th>
+{% endblock %}
 
-<header>
-    <nav> <table class=navbar> <tr>
-        <th class=navbar_center><a href="./index.html">Inicio</a></th>
-    </tr> </table> </nav>
-    <hr>
-</header>
-
-<section>
+{% block header %}
     <h1>Estadísticas de adopción</h1>
-    
-    <!-- Generé algunos datos aleatorios en un Google Spreadsheet:
-    https://docs.google.com/spreadsheets/d/1hkrI_IJEjlic5xptnqBhpwFqwJDP_6SsJWnInJ0EUaY/edit?gid=0#gid=0
-    No es público, pero quiero tener el link a mano. Usé esos gráficos como imágenes estáticas. -->
-    
+{% endblock %}
+
+{% block main %}
     <h2>Cantidad de avisos de adopción por día</h2>
-    <img src="./imgs/graph_lines_daily_ads.png" alt="Gráfico de líneas">
+    <img src="static/imgs/graph_lines_daily_ads.png" alt="Gráfico de líneas">
     
     <h2>Total de avisos por tipo de mascota</h2>
-    <img src="./imgs/graph_pie_animal_ratios.png" alt="Gráfico de torta">
+    <img src="static/imgs/graph_pie_animal_ratios.png" alt="Gráfico de torta">
     
     <h2>Cantidad de avisos mensuales por tipo de mascota</h2>
-    <img src="./imgs/graph_bars_monthly_ads.png" alt="Gráfico de barras">
-    
-    <h2 style="text-align: center;"><a href="./index.html">Regresar a la página principal</a></h2>
-    
-    <br>
-</section>
+    <img src="static/imgs/graph_bars_monthly_ads.png" alt="Gráfico de barras">
+{% endblock %}
 
-</body>
-</html>
+{% block footer %}
+    <h2 style="text-align: center;"><a href="..">Regresar a la página principal</a></h2>
+    <br>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
