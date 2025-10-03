@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <base href="..">
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+
+<body>
+
+    <nav> 
+        <table class=navbar>
+            <tr>{% block navrow %}{% endblock %}</tr>
+        </table>
+        <hr>
+    </nav>
+        
+    <header>{% block header %}{% endblock %}</header>
+
+    <main>{% block main %}{% endblock %}</main>
+
+    <footer>{% block footer %}{% endblock %}</footer>
+    
+    <div style="display: none">{% block scripts %}{% endblock %}</div>
+
+</body>
+
+</html>
