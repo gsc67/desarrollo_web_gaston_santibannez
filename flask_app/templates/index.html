@@ -1,34 +1,22 @@
-<!DOCTYPE HTML>
-<html lang="es">
+{% extends 'base.html' %} 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Mascotas El Carmen</title>
-    <link rel="stylesheet" href="./main.css">
-</head>
+{% block title %} Mascotas El Carmen {% endblock %}
 
-<body>
+{% block navrow %}
+    <th class=navbar_left><a href="./postear/">Agregar aviso</a></th>
+    <th class=navbar_center><a href="./listado/">Lista de avisos</a></th>
+    <th class=navbar_right><a href="./stats/">Estadísticas</a></th>
+{% endblock %}
 
-<header>
-    <nav> <table class=navbar> <tr>
-        <th class=navbar_left><a href="./postear.html">Agregar aviso</a></th>
-        <th class=navbar_center><a href="./listado.html">Lista de avisos</a></th>
-        <th class=navbar_right><a href="./stats.html">Estadísticas</a></th>
-    </tr> </table> </nav>
-    <hr>
-</header>
-
-<section>
+{% block header %}
     <h1>Mascotas El Carmen</h1>
-    
     <p>¡Bienvenidx a <em>Mascotas El Carmen</em>!</p>
-    
+{% endblock %}
+
+{% block main %}
     <h2>Últimos avisos publicados:</h2>
-    
     <br>
-    
     <table class=adList>
-        
         <colgroup> 
             <col style="width: 6em;"> 
             <col style="width: 6em;"> 
@@ -37,60 +25,25 @@
             <col style="width: 320px;">
         </colgroup>
         
-        <thead> <tr>
-            <th>Fecha Publicación</th>
-            <th>Comuna</th>
-            <th>Sector</th>
-            <th>Datos</th> <!-- Cantidad/Tipo/Edad -->
-            <th>Fotos</th>
-        </tr> </thead>
-        
-        <tbody> 
+        <thead>
             <tr>
-            <td>2024-11-01 15:00</td>
-            <td>Macul</td>
-            <td>Campus San Joaquín</td>
-            <td>1 gata<br>3 años</td>
-            <td><img src="./imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto"></td>
-            </tr> 
-            
-            <tr>
-            <td>2022-10-22 12:00</td>
-            <td>El Carmen</td>
-            <td>Plaza de armas</td>
-            <td>1 gata<br>9 años</td>
-            <td><img src="./imgs/cat_chikorita.jpeg" alt="Gatita Chikorita, primera foto"></td>
-            </tr> 
-            
-            <tr>
-            <td>2024-12-28 12:00</td>
-            <td>Huechuraba</td>
-            <td>Supermercado Santa Isabel, avenida El Carmen con Pedro Fontova Norte</td>
-            <td>1 perro<br>4 años</td>
-            <td><img src="./imgs/dog_manolo.jpeg" alt="Perrito Manolo, primera foto"></td>
-            </tr>  
-            
-            <tr>
-            <td>2021-12-11 12:00</td>
-            <td>Antofagasta</td>
-            <td>Pastelería <em>Masitas</em></td> <!-- Oh no, el usuario insertó código HTML. Terrible. -->
-            <td>1 gato<br>3 meses</td>
-            <td><img src="./imgs/cat_KEANU.jpg" alt="Gatito Keanu, primera foto"></td>
-            </tr> 
-            
-            <tr>
-            <td>2022-04-04 19:00</td>
-            <td>Santiago</td>
-            <td>Plaza de la Constitución, Morandé con Agustinas</td>
-            <td>1 perro<br>3 años</td>
-            <td><img src="./imgs/dog_pancho.jpeg" alt="Perrito Pancho, primera foto"></td>
+                <th>Fecha Publicación</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Datos</th> <!-- Cantidad/Tipo/Edad -->
+                <th>Fotos</th>
             </tr>
+        </thead>
+        
+        <tbody>
+            {# for something something crear cuerpo de la tabla #}
         </tbody>
-    
     </table>
-    
     <br>
-</section>
+{% endblock %}
 
-</body>
-</html>
+{% block footer %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
