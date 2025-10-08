@@ -25,7 +25,11 @@
             
                 <tr>
                     <td><label for="petRegion">Regi&oacute;n:</label></td>
-                    <td><select id="petRegion" name="petRegion">{# TODO: SQL #}</select></td>
+                    <td><select id="petRegion" name="petRegion">
+                    {% for region in regiones %}
+                    <option value="{{ region.nombre }}">{{ region.nombre }}</option>
+                    {% endfor %}
+                    </select></td>
                 </tr> 
                 <tr>
                     <td></td> 

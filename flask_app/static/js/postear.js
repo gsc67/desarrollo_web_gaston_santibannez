@@ -493,13 +493,13 @@ const generateSocialMediaOptions = () => {
 };
 
 // Similarmente, usaremos JavaScript para proporcionar las opciones de región
-const generateRegionOptions = () => {
+/*const generateRegionOptions = () => {
     const formRegiones = document.getElementById("petRegion");
     for (const dictRegion of regiones) {
         const region = dictRegion["nombre"];
         formRegiones.innerHTML += '<option value="' + region + '">' + region + '</option>';
     }
-};
+};*/
 
 
 /*  ================================
