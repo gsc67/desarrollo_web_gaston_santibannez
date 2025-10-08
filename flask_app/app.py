@@ -19,9 +19,13 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 def main():
     return render_template("index.html")
     
-@app.route("/postear/")
+@app.route("/postear/", methods=["GET", "POST"])
 def postear():
-    return render_template("postear.html")
+    if request.method == "GET":
+        return render_template("postear.html", success=False)
+    else:
+        # procesar data
+        return render_template("postear.html", success=True)
 
 @app.route("/listado/")
 def listado():

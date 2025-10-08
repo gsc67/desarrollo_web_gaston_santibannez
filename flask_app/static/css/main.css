@@ -1,0 +1,171 @@
+/* -----------------------------------------------
+Esta es la configuración para los principales elementos html.
+----------------------------------------------- */
+
+body {
+    background-color: beige;
+    color: black;
+}
+
+p, label {
+    font-family: "Consolas", monospace;
+    font-size: 18px;
+}
+
+h1 {
+    font-family: "Georgia", serif;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Georgia", serif;
+    font-size: 24px;
+}
+
+h3 {
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    font-style: italic;
+}
+
+em { /* ¡énfasis! */
+    letter-spacing: 0.055em;
+    font-style: italic;
+    font-weight: bold;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+table {
+    width: 100%;
+}
+
+/* -----------------------------------------------
+Estos elementos son los hipervínculos que permiten navegar la página
+----------------------------------------------- */
+
+table.navbar {
+    font-family: "Consolas", monospace;
+    margin-bottom: 0.5em;
+    width: 100%;
+    table-layout: fixed;
+    color: yellow;
+}
+
+th.navbar_left {
+    text-align: left;
+}
+
+th.navbar_center {
+    text-align: center;
+}
+
+th.navbar_right {
+    text-align: right;
+}
+
+/* -----------------------------------------------
+Clases e IDs
+----------------------------------------------- */
+
+.error {
+    font-family: serif;
+    font-size: 0.8em;
+    color: red;
+    font-weight: bold;
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
+.hidden {
+    display: none;
+}
+
+#sendButton {
+    font-size: 1.5em;
+    margin: auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    display: block;
+}
+
+.adList {
+    border: 7px solid gray;
+    border-collapse: collapse;
+    width: auto;
+    margin: auto;
+    /*color: rgb(233,233,233);*/
+    background-color: rgb(205,170,125);
+}
+
+.adList td {
+    font-family: "Comic Sans MS", cursive;
+    font-size: 15px;
+    text-align: center;
+}
+
+.adList th {
+    font-family: "Georgia", serif;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.adList td, .adList th {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.adList img { /* Para imágenes dentro del listado de adopción */
+    /* En estricto rigor, debería usar los parámetros width y height, 
+    no max-width y max-height. Eso cumpliría exactamente con lo solicitado en la tarea.
+    Sin embargo, opté por hacerlo de esta forma por los siguientes motivos: 
+    
+    Las imágenes probablemente no vengan con la proporción adecuada. 
+    Entonces, para escalarlas al tamaño correcto hay dos opciones:
+    1) "Croppearlas", en cuyo caso se pueden ver de forma no deseada
+    2) Deformarlas, lo que también se verá visualmente mal
+    
+    Ninguna de las dos opciones es deseable. 
+    Entonces, podemos _asumir_ que las fotos vienen con la proporción correcta.
+    Pero las fotos que tengo son fotos reales que le solicité a varios amigos de sus mascotas
+    (side-note: tengo su permiso/derechos). Y la realidad es que la gente no necesariamente saca fotos en 4:3.
+    Por eso, me pareció que sería mejor práctica acomodar la aplicación web a los usuarios, 
+    que acomodar los usuarios a la aplicación.
+    
+    Por eso es que opté por usar los parámetros max-width en lugar de width, y el análogo para height.
+    Esto consigue de facto encajonar la imagen a la resolución deseada (320:240) sin cortarla ni deformarla.
+    */
+    max-width: 320px;
+    max-height: 240px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* Misma decisión respecto al tamaño de imágenes que en el bloque anterior */
+img.detailedAdSmall {
+    max-width: 320px; 
+    max-height: 240px; 
+    display: inline;
+}
+
+img.detailedAdBig {
+    max-width: 800px; 
+    max-height: 600px; 
+}
+
+p.ASCII_art {
+    font-family: monospace;
+    text-align: center;
+    white-space: pre;
+    background-color: white;
+}

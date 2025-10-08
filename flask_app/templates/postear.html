@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block main %}
-    <form name="newPetAd" id="newPetAd">
+    <form name="newPetAd" id="newPetAd" action="postear" method="post">
         <section>
             <h2>Informaci&oacute;n de la Locaci&oacute;n</h2>
             
@@ -232,9 +232,11 @@
 {% endblock %}
 
 {% block footer %}
-    <section id="goodbye" class=hidden style="text-align: center;">
+    {% if success %}
+    <section id="goodbye" style="text-align: center;">
         <h2 style="text-align: center;"><a href="../">Regresar a la p&aacute;gina principal</a></h2>
     </section>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}

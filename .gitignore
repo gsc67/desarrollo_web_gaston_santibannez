@@ -1,9 +1,12 @@
 flask_app/database/
-flask_app/static/
 flask_app/utils/
 
 flask_app/__pycache__/
 flask_app/database/__pycache__/
+flask_app/static/imgs/
+flask_app/static/js/confesiones.js
+flask_app/static/js/login.js
+flask_app/static/js/modal.js
 flask_app/utils/__pycache__/
 
 flask_app/templates/extend_base.html
