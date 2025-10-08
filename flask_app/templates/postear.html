@@ -27,7 +27,7 @@
                     <td><label for="petRegion">Regi&oacute;n:</label></td>
                     <td><select id="petRegion" name="petRegion">
                     {% for region in regiones %}
-                    <option value="{{ region.nombre }}">{{ region.nombre }}</option>
+                    <option value="{{ region.id }}">{{ region.nombre }}</option>
                     {% endfor %}
                     </select></td>
                 </tr> 
@@ -38,7 +38,11 @@
                 
                 <tr>
                     <td><label for="petComuna">Comuna:</label></td>
-                    <td><select id="petComuna" name="petComuna"></select></td>
+                    <td><select id="petComuna" name="petComuna">
+                    {% for comuna in comunas %}
+                    <option value="{{ comuna.id }}">{{ comuna.nombre }}</option>
+                    {% endfor %}
+                    </select></td>
                 </tr>
                 <tr>
                     <td></td> 

@@ -27,7 +27,7 @@ class Comuna(Base):
     __tablename__ = 'comuna'
 
     id = Column(BigInteger, primary_key=True, autoincrement=False)
-    region_id = Column(BigInteger)
+    region_id = Column(BigInteger, nullable=False)
     nombre = Column(String(255), nullable=False)
 
     #region = relationship("Region", back_populates="region")
@@ -38,3 +38,22 @@ def get_regiones():
     regiones = session.query(Region).all()
     session.close()
     return regiones
+    
+def get_comunas():
+    session = SessionLocal()
+    comunas = session.query(Comuna).all()
+    session.close()
+    return comunas
+    
+def validate_petRegion(region): 
+    session = SessionLocal()
+    bool_ = session.query(Region).filter_by(id=region).first()
+    session.close()
+    if bool_ == None: return False
+    else: return True
+def validate_petComuna(comuna): 
+    session = SessionLocal()
+    bool_ = session.query(Comuna).filter_by(id=comuna).first()
+    session.close()
+    if bool_ == None: return False
+    else: return True

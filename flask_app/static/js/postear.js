@@ -6,6 +6,7 @@ let numberOfPhotos = 1;
 
 const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
 
+/* deprecated
 // Mis más sinceras disculpas por esto: los import me lanzaban un bloqueo porque "CORS Request not HTTP",
 // y no encontré que, al menos en esta fase, solucionarlo ameritara más esfuerzo que simplemente mover el código acá:
 const region_comuna = {
@@ -81,6 +82,7 @@ const region_comuna = {
 // Imagino debe haber _algún_ motivo, pero lo desconozco u.u. Por eso, no modifiqué la info.
 // Pero lo que realmente utilizaré es el array dentro de la llave "regiones"
 const regiones = region_comuna["regiones"];
+*/
 
 
 /*  ================================
@@ -205,7 +207,7 @@ const stringIsHTMLDate = (date) => {
 Primer bloque del formulario 
 */
 
-const handleCommuneError = () => {
+/*const handleCommuneError = () => {
     let regionError = document.getElementById("petRegionErrorMessage");
     let comunaError = document.getElementById("petComunaErrorMessage");
     regionError.innerHTML = "";
@@ -221,7 +223,7 @@ const handleCommuneError = () => {
     
     if (regionError.innerHTML == "" && comunaError.innerHTML == "") { return 0; }
     else { return 1; }
-};
+};*/
 
 const handleSectorError = () => {
     let sectorError = document.getElementById("sectorErrorMessage");
@@ -566,7 +568,7 @@ const dynamicUsernameBoxDisplay = () => {
     supportedContactPlatforms.forEach(displayPlatformUsernameBox);
 };
 
-const dynamicRegionDisplay = () => {
+/*const dynamicRegionDisplay = () => {
     const region = document.getElementById("petRegion");
     const formComunas = document.getElementById("petComuna");
     formComunas.innerHTML = "";
@@ -581,7 +583,7 @@ const dynamicRegionDisplay = () => {
             break;
         }
     }
-};
+};*/
 
 const dynamicPhotoDisplay = () => {
     displayAddPhotoButton();
@@ -596,7 +598,7 @@ const dynamicPhotoDisplay = () => {
 
 // Función validadora del formulario
 const validateAdPostData = () => {
-    if (handleCommuneError() +
+    if (/*handleCommuneError() +*/
         handleSectorError() +
         handleNameError() +
         handleEmailError() +
@@ -622,7 +624,7 @@ const validateAdPostData = () => {
 
 // Generación del archivo HTML
 generateSocialMediaOptions();
-generateRegionOptions();
+//generateRegionOptions();
 
 dynamicUsernameBoxDisplay();
 dynamicPhotoDisplay();
@@ -638,7 +640,7 @@ document.getElementById("sendButton").addEventListener("click", validateAdPostDa
 document.getElementById("contactThroughDiv").addEventListener("change", dynamicUsernameBoxDisplay);
 
 // Esto detecta cuando el usuario cambia la región, para cambiar de forma acorde la lista de comunas posibles
-document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
+// document.getElementById("petRegion").addEventListener("change", dynamicRegionDisplay);
 
 // Estos botones permiten aumentar la cantidad de fotos que se proveen al formulario
 for (index = 1; index < 5; index++) {
@@ -657,10 +659,10 @@ for (index = 1; index < 5; index++) {
 Valores predeterminados 
 */
 
-document.getElementById("petRegion").value = "Región del Ñuble";
+document.getElementById("petRegion").value = "16";
 
-dynamicRegionDisplay();
-document.getElementById("petComuna").value = "El Carmen";
+//dynamicRegionDisplay();
+document.getElementById("petComuna").value = "80118";
 
 const lowDeadlineJS = new Date();
 lowDeadlineJS.setHours(lowDeadlineJS.getHours() + 3);
