@@ -8,8 +8,10 @@ import os
 import uuid
 import datetime
 import re
+from database import ad_handler
 
 UPLOAD_FOLDER = 'static/uploads'
+PLATFORMS = ("Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog")
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
@@ -27,7 +29,8 @@ def postear():
         success = False
     else:
         if validar_form(request.form):
-            # insertar en base de datos
+            # Insertar en base de datos
+            ad_handler.new_ad(request.form)
             success = True
         else: success = False
     return render_template( "postear.html", \
@@ -58,10 +61,11 @@ def validate_contactEmail(mail):
 def validate_contactPhoneNumber(number): 
     if number == '': return True
     else:
-        return number[0] == "+" and \
+        return len(number) == 12 and \
+            number[0] == "+" and \
             number[1:4] == "569" and \
-            bool(re.match('^[0-9]*$', number[4:12])) and \
-            len(number) == 12
+            bool(re.match('^[0-9]*$', number[4:12]))
+            
 
 def validate_petSpecies(species): return species in ("perro", "gato")
 def validate_petQuantity(quantity): 
@@ -90,17 +94,17 @@ def validate_petDelivery(s):
         return True
     except:
         return False
+def validate_petDescription(descrp): return len(descrp) <= 255
 
 def validate_platforms(form): 
-    platforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"]
     checkNum = 0
-    for plat in platforms:
+    for plat in PLATFORMS:
         if form.get(f'contactThrough{plat}', 'false').lower() == 'true':
             checkNum += 1
             if not (4 <= len(form.get(f'contact{plat}User', '')) <= 50):
                 return False
     return checkNum <= 5
-def validate_images(form): return True  # pass
+def validate_images(form): return True  # TODO. pass
 
 def validar_form(form: dict) -> bool:
     return region_handler.validate_petRegion(form["petRegion"]) and \
@@ -115,7 +119,8 @@ def validar_form(form: dict) -> bool:
         validate_petAge(form["petAge"]) and \
         validate_petAgeMeasure(form["petAgeMeasure"]) and \
         validate_petDelivery(form["petDelivery"]) and \
-        validate_images(form)
+        validate_images(form) and \
+        validate_petDescription(form.get("petDescription", ''))
 
 
 if __name__ == "__main__":
