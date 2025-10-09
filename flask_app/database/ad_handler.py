@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 import json
 from markupsafe import escape
 import enum
+import datetime
 
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
@@ -11,6 +12,7 @@ DB_HOST = "localhost"
 DB_PORT = 3306
 
 DATABASE_URL = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+PLATFORMS = ("whatsapp", "telegram", "X", "instagram", "tiktok", "otra")
 
 engine = create_engine(DATABASE_URL, echo=False, future=True)
 SessionLocal = sessionmaker(bind=engine)
@@ -19,7 +21,7 @@ Base = declarative_base()
 
 class tipoEnum(enum.Enum):
     gato = "gato"
-    perro = "perr
+    perro = "perro"
 
 class unidadEnum(enum.Enum):
     a = "a"
@@ -54,7 +56,7 @@ class Contacto(Base):
     __tablename__ = 'contactar_por'
     
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    unidad_medida = Column(Enum(redEnum), nullable=False)
+    nombre = Column(Enum(redEnum), nullable=False)
     identificador = Column(String(150), nullable=False)
     aviso_id = Column(BigInteger, nullable=False)
 
@@ -74,73 +76,91 @@ def get_avisos():
     
 # Inserta información válida en la base de datos
 def new_ad(form: dict):
-    # TODO
-    pass
+    def esc(s, cut=False):
+        if s == None: return s
+        else: return escape(s) if not cut else escape(s)[1:]
+    
     session = SessionLocal()
     
-    nombre = escape(form["contactName"])
-    email = escape(form["contactEmail"])
-    numero = form.get("contactPhoneNumber", None)  # safe
-    WS = escape(form.get('contactwhatsappUser', None))
-    TG = escape(form.get('contacttelegramUser', None))
-    TW = escape(form.get('contactXUser', None))
-    IG = escape(form.get('contactinstagramUser', None))
-    TT = escape(form.get('contacttiktokUser', None))
-    FL = escape(form.get('contactotraUser', None))
-    contacto = Contacto(nombre=nombre, 
-        email=email, 
-        numero=numero,
-        WS = WS,
-        TG = TG,
-        TW = TW,
-        IG = IG,
-        TT = TT,
-        FL = FL)
-    session.add(contacto)
-    session.commit()
+    fecha_ingreso   = datetime.datetime.now()
+    comuna_id       = form["petComuna"]
+    sector          = esc(form.get("petSector", None))
+    nombre          = esc(form["contactName"])
+    email           = esc(form["contactEmail"])
+    celular         = esc(form["contactPhoneNumber"], True)
+    tipo            = form["petSpecies"]
+    cantidad        = form["petQuantity"]
+    edad            = form["petAge"]
+    unidad_medida   = form["petAgeMeasure"]
+    _ = form["petDelivery"]
+    year = _[0:4]
+    month = _[5:7]
+    day   = _[8:10]
+    hour  = _[11:13]
+    min_  = _[14:16]
+    fecha_entrega   = datetime.datetime(int(year), \
+                        int(month), \
+                        int(day), \
+                        int(hour), \
+                        int(min_))
+    descripcion     = esc(form.get("petDescription", None))
     
-    
-    region      = form["petRegion"]
-    comuna      = form["petComuna"]
-    sector      = escape(form.get("petSector", None))
-    id_contacto = contacto.id
-    especie     = form["petSpecies"]
-    cantidad    = form["petQuantity"]
-    edad        = form["petAge"]
-    medida      = form["petAgeMeasure"]
-    fecha       = form["petDelivery"]
-    descripcion = form.get("petDescription", None)
-    aviso = Aviso(region=region,
-        comuna      = comuna      ,
-        sector      = sector      ,
-        id_contacto = id_contacto ,
-        especie     = especie     ,
-        cantidad    = cantidad    ,
-        edad        = edad        ,
-        medida      = medida      ,
-        fecha       = fecha       ,
-        descripcion = descripcion )
+    aviso = Aviso( \
+        fecha_ingreso   = fecha_ingreso,
+        comuna_id       = comuna_id,    
+        sector          = sector,       
+        nombre          = nombre,          
+        email           = email,           
+        celular         = celular,         
+        tipo            = tipo,       
+        cantidad        = cantidad,
+        edad            = edad,    
+        unidad_medida   = unidad_medida,
+        fecha_entrega   = fecha_entrega,
+        descripcion     = descripcion \
+        )
     session.add(aviso)
     session.commit()
+        
+    for plat in PLATFORMS:
+        if form.get(f"contactThrough{plat}", "false").lower() == "true":
+            nombre          = plat
+            identificador   = esc(form[f"contact{plat}User"])
+            aviso_id        = aviso.id
+            
+            contacto = Contacto(nombre=nombre, 
+                identificador=identificador, aviso_id=aviso_id)
+            session.add(contacto)
+            session.commit()
     
-    # TODO
-    #foto = Foto()
-    #session.add(foto)
-    #session.commit()
+    ### TODO: FOR (cada foto) ###
+    if False:  # para evitar errores mientras no esté implementado
+        ruta_archivo    = 0  # TODO
+        nombre_archivo  = 0  # TODO
+        aviso_id        = aviso.id
+        
+        foto = Foto(ruta_archivo=ruta_archivo, 
+            nombre_archivo=nombre_archivo, aviso_id=aviso_id)
+        session.add(foto)
+        session.commit()
+    ### END FOR ###
     
     session.close()
 
-def get_avisos(num):
+def get_avisos(num, offset=0):
     session = SessionLocal()
-    avisos = reversed(session.query(Aviso).order_by(Aviso.id.desc()).limit(num).all())
+    avisos = reversed(session.query(Aviso).\
+        order_by(Aviso.id.desc()).\
+        limit(num).\
+        offset(offset).\
+        all()\
+        )
+        
+    _ = session.query(Aviso).all()
+    
     session.close()
-    return avisos
-
-def get_ALL_avisos():
-    session = SessionLocal()
-    avisos = reversed(session.query(Aviso).order_by(Aviso.id.desc()).all())
-    session.close()
-    return avisos
+    
+    return (avisos, offset+num<len(_))
 
 def get_fotos():
     session = SessionLocal()

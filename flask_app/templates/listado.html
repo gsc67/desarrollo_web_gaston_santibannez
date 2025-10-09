@@ -52,6 +52,9 @@
             {% endfor %}
         </tbody>
     </table>
+    <br>
+    {% if num>1 %}<a href="{{ url_for('listado_pagina', num=num-1) }}">Retroceder</a><br>{% endif %}
+    {% if avanzar %}<a href="{{ url_for('listado_pagina', num=num+1) }}">Avanzar</a>{% endif %}
 {% endblock %}
 
 {% block footer %}

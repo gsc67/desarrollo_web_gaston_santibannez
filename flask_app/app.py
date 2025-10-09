@@ -19,9 +19,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 
 ################################################################################
+
 @app.route("/")
 def main():
-    avisos = ad_handler.get_avisos(5)
+    avisos = ad_handler.get_avisos(5)[0]
     fotos = ad_handler.get_fotos()
     return render_template("index.html", avisos=avisos, fotos=fotos)
     
@@ -31,10 +32,10 @@ def postear():
         success = False
     else:
         if validar_form(request.form):
-            # Insertar en base de datos
-            ad_handler.new_ad(request.form)
+            ad_handler.new_ad(request.form)  # Insertar en base de datos
             success = True
-        else: success = False
+        else: 
+            success = False
     return render_template( "postear.html", \
                             success  = success, \
                             regiones = region_handler.get_regiones(), \
@@ -42,9 +43,14 @@ def postear():
 
 @app.route("/listado/")
 def listado():
-    avisos = ad_handler.get_ALL_avisos()
+    return redirect(url_for("listado_pagina", num=1))
+
+@app.route("/listado/<int:num>")
+def listado_pagina(num):
+    if num<=0: return redirect(url_for("listado"))
+    avisos, avanzar = ad_handler.get_avisos(5,5*(num-1))
     fotos = ad_handler.get_fotos()
-    return render_template("listado.html", avisos=avisos, fotos=fotos)
+    return render_template("listado.html", avisos=avisos, fotos=fotos, num=num, avanzar=avanzar)
 
 @app.route("/stats/")
 def stats():
@@ -121,6 +127,20 @@ def validate_platforms(form):
 def validate_images(form): return True  # TODO. pass
 
 def validar_form(form: dict) -> bool:
+    print(region_handler.validate_petRegion(form["petRegion"]))
+    print(region_handler.validate_petComuna(form["petComuna"]))
+    print(validate_petSector(form.get("petSector", '')))
+    print(validate_contactName(form["contactName"]))
+    print(validate_contactEmail(form["contactEmail"]))
+    print(validate_contactPhoneNumber(form.get("contactPhoneNumber", '')))
+    print(validate_platforms(form))
+    print(validate_petSpecies(form["petSpecies"]))
+    print(validate_petQuantity(form["petQuantity"]))
+    print(validate_petAge(form["petAge"]))
+    print(validate_petAgeMeasure(form["petAgeMeasure"]))
+    print(validate_petDelivery(form["petDelivery"]))
+    print(validate_images(form))
+    print(validate_petDescription(form.get("petDescription", '')))
     return region_handler.validate_petRegion(form["petRegion"]) and \
         region_handler.validate_petComuna(form["petComuna"]) and \
         validate_petSector(form.get("petSector", '')) and \
