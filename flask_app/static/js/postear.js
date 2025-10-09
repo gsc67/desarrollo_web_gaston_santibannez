@@ -4,7 +4,7 @@
 
 let numberOfPhotos = 1;
 
-const supportedContactPlatforms = ["Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog"];
+const supportedContactPlatforms = ["whatsapp", "telegram", "X", "instagram", "tiktok", "otra"];
 
 /* deprecated
 // Mis más sinceras disculpas por esto: los import me lanzaban un bloqueo porque "CORS Request not HTTP",

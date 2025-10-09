@@ -11,7 +11,7 @@ import re
 from database import ad_handler
 
 UPLOAD_FOLDER = 'static/uploads'
-PLATFORMS = ("Whatsapp", "Telegram", "X", "Instagram", "Tiktok", "Fotolog")
+PLATFORMS = ("whatsapp", "telegram", "X", "instagram", "tiktok", "otra")
 
 app = Flask(__name__)
 app.secret_key = "secret_key"
@@ -21,7 +21,9 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 ################################################################################
 @app.route("/")
 def main():
-    return render_template("index.html")
+    avisos = ad_handler.get_avisos(5)
+    fotos = ad_handler.get_fotos()
+    return render_template("index.html", avisos=avisos, fotos=fotos)
     
 @app.route("/postear/", methods=["GET", "POST"])
 def postear():

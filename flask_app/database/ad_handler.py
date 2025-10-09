@@ -67,12 +67,12 @@ def new_ad(form: dict):
     nombre = escape(form["contactName"])
     email = escape(form["contactEmail"])
     numero = form.get("contactPhoneNumber", None)  # safe
-    WS = escape(form.get('contactWhatsappUser', None))
-    TG = escape(form.get('contactTelegramUser', None))
+    WS = escape(form.get('contactwhatsappUser', None))
+    TG = escape(form.get('contacttelegramUser', None))
     TW = escape(form.get('contactXUser', None))
-    IG = escape(form.get('contactInstagramUser', None))
-    TT = escape(form.get('contactTiktokUser', None))
-    FL = escape(form.get('contactFotologUser', None))
+    IG = escape(form.get('contactinstagramUser', None))
+    TT = escape(form.get('contacttiktokUser', None))
+    FL = escape(form.get('contactotraUser', None))
     contacto = Contacto(nombre=nombre, 
         email=email, 
         numero=numero,
@@ -115,3 +115,15 @@ def new_ad(form: dict):
     #session.commit()
     
     session.close()
+
+def get_avisos(num):
+    session = SessionLocal()
+    avisos = reversed(session.query(Aviso).order_by(Aviso.id.desc()).limit(num).all())
+    session.close()
+    return avisos
+
+def get_fotos():
+    session = SessionLocal()
+    fotos = session.query(Foto).all()
+    session.close()
+    return fotos
