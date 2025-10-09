@@ -1,7 +1,8 @@
-from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, BigInteger, String, ForeignKey, DateTime, Enum, Text
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 import json
 from markupsafe import escape
+import enum
 
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
@@ -16,41 +17,54 @@ SessionLocal = sessionmaker(bind=engine)
 
 Base = declarative_base()
 
+class tipoEnum(enum.Enum):
+    gato = "gato"
+    perro = "perr
+
+class unidadEnum(enum.Enum):
+    a = "a"
+    m = "m"
+
+class redEnum(enum.Enum):
+    whatsapp = "whatsapp"
+    telegram = "telegram"
+    X = "X"
+    instagram = "instagram"
+    tiktok = "tiktok"
+    otra = "otra"
+
 class Aviso(Base):
     __tablename__ = 'aviso_adopcion'
     
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    region      = Column(String(255), nullable=False)
-    comuna      = Column(String(255), nullable=False)
+    fecha_ingreso = Column(DateTime, nullable=False)
+    comuna_id   = Column(BigInteger, nullable=False)
     sector      = Column(String(100), nullable=True)
-    id_contacto = Column(BigInteger, nullable=False)
-    especie     = Column(String(5), nullable=False)
+    nombre      = Column(String(200), nullable=False)
+    email       = Column(String(100), nullable=False)
+    celular     = Column(String(15), nullable=True)
+    tipo        = Column(Enum(tipoEnum), nullable=False)
     cantidad    = Column(BigInteger, nullable=False)
     edad        = Column(BigInteger, nullable=False)
-    medida      = Column(String(6), nullable=False)
-    fecha       = Column(String(16), nullable=False)
-    descripcion = Column(String(255), nullable=True)
+    unidad_medida = Column(Enum(unidadEnum), nullable=False)
+    fecha_entrega = Column(DateTime, nullable=False)
+    descripcion = Column(Text(500), nullable=True)
 
 class Contacto(Base):
     __tablename__ = 'contactar_por'
     
     id = Column(BigInteger, primary_key=True, autoincrement=True)
-    nombre = Column(String(200), nullable=False)
-    email = Column(String(100), nullable=False)
-    numero = Column(String(12), nullable=True)
-    WS = Column(String(50), nullable=True)
-    TG = Column(String(50), nullable=True)
-    TW = Column(String(50), nullable=True)
-    IG = Column(String(50), nullable=True)
-    TT = Column(String(50), nullable=True)
-    FL = Column(String(50), nullable=True)
+    unidad_medida = Column(Enum(redEnum), nullable=False)
+    identificador = Column(String(150), nullable=False)
+    aviso_id = Column(BigInteger, nullable=False)
 
-# TODO
-# class Foto(Base):
-    # __tablename__ = 'foto'
+class Foto(Base):
+    __tablename__ = 'foto'
 
-    #id = Column(BigInteger, primary_key=True, autoincrement=False)
-    #nombre = Column(String(255), nullable=False)
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    ruta_archivo = Column(String(300), nullable=False)
+    nombre_archivo = Column(String(300), nullable=False)
+    aviso_id = Column(BigInteger, nullable=False)
     
 def get_avisos():
     session = SessionLocal()
@@ -133,3 +147,7 @@ def get_fotos():
     fotos = session.query(Foto).all()
     session.close()
     return fotos
+    
+def get_ad_by_ID(id):
+    return Aviso.query.get(id)
+    

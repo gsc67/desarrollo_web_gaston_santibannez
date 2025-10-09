@@ -50,6 +50,16 @@ def listado():
 def stats():
     return render_template("stats.html")
 
+@app.route("/detailed_ads/<id>")
+def detailed_ad(id):
+    try:
+        aviso = ad_handler.get_ad_by_ID(id)
+        fotos = ad_handler.get_fotos()
+        return render_template("detailed_ad.html", aviso=aviso, fotos=fotos)
+    except:
+        return redirect(url_for(listado))
+    
+
     
 ################################################################################
 
@@ -98,7 +108,7 @@ def validate_petDelivery(s):
         return True
     except:
         return False
-def validate_petDescription(descrp): return len(descrp) <= 255
+def validate_petDescription(descrp): return len(descrp) <= 500
 
 def validate_platforms(form): 
     checkNum = 0

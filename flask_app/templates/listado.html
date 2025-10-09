@@ -36,7 +36,7 @@
         
         <tbody> 
             {% for a in avisos %}
-            <tr>
+            <tr onclick="location.href='./detailed_ads/{{ a.id }}';">
                 <td>{{ a.fecha_ingreso }}</td>
                 <td>{{ a.fecha_entrega }}</td>
                 <td>{{ a.comuna_id }}</td>

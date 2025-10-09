@@ -1,28 +1,30 @@
 {% extends 'base.html' %} 
 
-{% block title %} EN ADOPCIÓN: _todo_{# nombre mascota #} {% endblock %}
+{% block title %} EN ADOPCIÓN {% endblock %}
 
 {% block navrow %}
 {% endblock %}
 
 {% block header %}
-    <h1>EN ADOPCIÓN - _todo_{# nombre mascota #}</h1>
+    <h1>EN ADOPCIÓN</h1>
 {% endblock %}
 
 {% block main %}
-    {# aún no sé SQL #}
-    <!--
     <section>
     
     <div style="text-align: center;" id="div1">
-        <img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto" class=detailedAdSmall id="img1">
-        <img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto" class=detailedAdSmall id="img2">
+    {% for f in fotos %}
+    {% if f.aviso_id == a.id %}
+        <img src="{{ f.ruta_archivo }}" alt="{{ f.nombre_archivo }}" class=detailedAdSmall>
+    {% endif %}
+    {% endfor %}
     </div>
     
     <div id="div2"> <table style="width: 800px; margin: auto;">
         <tr><td style="text-align: right; white-space: pre;"><button type="button" id="closeButton"> X </button></td></tr>
         <tr><td><span id="img1_2"><img src="../imgs/cat_cucha.jpeg" alt="Gatita Cucha, primera foto, grande" class=detailedAdBig></span></td></tr>
         <tr><td><span id="img2_2"><img src="../imgs/cat_cucha_2.jpeg" alt="Gatita Cucha, segunda foto, grande" class=detailedAdBig></span></td></tr>
+
     </table> </div>
     
     <div id="div3">
@@ -107,7 +109,6 @@
     <br>
     </div>
 </section>
-    -->
 {% endblock %}
 
 {% block footer %}
