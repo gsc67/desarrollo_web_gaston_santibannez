@@ -122,6 +122,12 @@ def get_avisos(num):
     session.close()
     return avisos
 
+def get_ALL_avisos():
+    session = SessionLocal()
+    avisos = reversed(session.query(Aviso).order_by(Aviso.id.desc()).all())
+    session.close()
+    return avisos
+
 def get_fotos():
     session = SessionLocal()
     fotos = session.query(Foto).all()

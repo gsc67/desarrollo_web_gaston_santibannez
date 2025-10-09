@@ -42,7 +42,9 @@ def postear():
 
 @app.route("/listado/")
 def listado():
-    return render_template("listado.html")
+    avisos = ad_handler.get_ALL_avisos()
+    fotos = ad_handler.get_fotos()
+    return render_template("listado.html", avisos=avisos, fotos=fotos)
 
 @app.route("/stats/")
 def stats():

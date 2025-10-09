@@ -35,7 +35,21 @@
         </thead>
         
         <tbody> 
-            {# for something something crear cuerpo de la tabla #}
+            {% for a in avisos %}
+            <tr>
+                <td>{{ a.fecha_ingreso }}</td>
+                <td>{{ a.fecha_entrega }}</td>
+                <td>{{ a.comuna_id }}</td>
+                <td>{{ a.sector }}</td>
+                <td>{{ a.cantidad }} {{ a.tipo }}{% if a.cantidad > 1 %}s{% endif %} de {{ a.edad }}{{ a.unidad_medida }}</td>
+                <td>{{ a.nombre }}</td>
+                <td>{% for f in fotos %}
+                {% if f.aviso_id == a.id %}
+                <img src="{{ f.ruta_archivo }}" alt="{{ f.nombre_archivo }}">
+                {% endif %}
+                {% endfor %}</td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
